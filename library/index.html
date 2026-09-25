@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"><style>:root{
+  --ink:#163529;--ink2:#1f4a38;--cream:#efece3;--paper:#ffffff;--paper2:#f7f5ef;
+  --orange:#d47b2c;--orange-soft:#f4e3d1;--green:#3f7a58;--green-l:#82b499;
+  --tdark:#183a2c;--muted:#6f7d73;--line:#dcd7cc;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Pretendard',sans-serif;}
+html,body{background:#888;}
+.page{width:794px;min-height:1123px;background:var(--cream);margin:0 auto;position:relative;overflow:hidden;page-break-after:always;}
+.hero{background:var(--ink);color:#fff;padding:30px 44px 26px;position:relative;overflow:hidden;}
+.hero .glow{position:absolute;top:-120px;right:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(184,150,70,.30),transparent 62%);}
+.hero .eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--green-l);position:relative;z-index:1}
+.hero h1{font-size:29px;font-weight:800;line-height:1.25;margin-top:11px;position:relative;z-index:1;letter-spacing:-.01em}
+.hero h1 .o{color:#e7b877}
+.hero .sub{font-size:13px;color:#bcccc2;margin-top:9px;position:relative;z-index:1;line-height:1.55}
+.body{padding:22px 44px 0;}
+.sec{margin-bottom:16px;}
+.sec-h{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-h .n{background:var(--orange);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:13px 15px;}
+.card.dark{background:var(--ink);border-color:var(--ink)}
+.card.soft{background:var(--orange-soft);border-color:#e7cfb4}
+.card h3{font-size:14px;font-weight:800;color:var(--tdark);line-height:1.3;margin-bottom:5px}
+.card.dark h3{color:#fff}
+.card p{font-size:11.5px;color:var(--muted);line-height:1.55}
+.card.dark p{color:#c2d1c8}
+.card.soft p{color:#8a6a44}
+.ph{width:112px;height:112px;border-radius:14px;object-fit:cover;border:2px solid rgba(255,255,255,.15)}
+.rowlist{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rowlist li{font-size:12.5px;color:var(--tdark);line-height:1.45;padding-left:17px;position:relative}
+.rowlist li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800}
+.rowlist li b{color:var(--ink);font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700;color:var(--tdark)}
+.chip.acc{background:var(--orange);border-color:var(--orange);color:#fff}
+.tl{display:flex;flex-direction:column;gap:8px}
+.trow{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 15px}
+.trow .yr{flex-shrink:0;width:92px;font-size:11.5px;font-weight:800;color:var(--orange)}
+.trow .d{font-size:12px;color:var(--tdark);line-height:1.5}
+.trow .d b{font-weight:800}
+.foot{position:absolute;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:13px 44px;display:flex;justify-content:space-between;align-items:center}
+.foot .l{font-size:13px;font-weight:800}
+.foot .l .o{color:#e7b877}
+.foot .r{font-size:11px;color:#bcccc2;text-align:right;line-height:1.6}
+.note{font-size:10.5px;color:var(--muted);line-height:1.5}
+.big{display:flex;gap:20px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:15px 18px}
+.big .k{font-size:11px;color:var(--muted);font-weight:700}
+.big .v{font-size:15px;font-weight:800;color:var(--tdark);margin-top:2px}
+
+.page{min-height:auto;padding-bottom:30px}
+.vitem{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 15px;margin-bottom:9px}
+.vitem .vt{font-size:13.5px;font-weight:800;color:var(--tdark);line-height:1.4}
+.vitem .vm{font-size:11px;color:var(--muted);margin-top:2px}
+.vitem .vu{font-size:11px;color:var(--green);word-break:break-all}
+.vitem .vp{font-size:12px;color:#5a675d;line-height:1.5;margin-top:5px}
+.vitem .clip{display:inline-block;background:var(--orange-soft);border:1px solid #e7cfb4;color:#8a6a44;font-size:11px;font-weight:700;border-radius:6px;padding:3px 9px;margin-top:6px}
+.cath{font-size:15px;font-weight:800;color:#fff;background:var(--ink);border-radius:9px;padding:8px 14px;margin:16px 0 10px}
+.warn{background:var(--orange-soft);border:1px solid #e7cfb4;border-radius:10px;padding:12px 16px;font-size:12px;color:#8a6a44;line-height:1.6}
+code{background:#1f2d26;color:#e7d3b0;font-size:11px;padding:2px 6px;border-radius:5px;font-family:monospace}
+</style></head><body>
+<div class="page">
+  <div class="hero">
+    <div class="glow"></div>
+    <div class="eyebrow">LIFE 2.0 · 2막1장 · 강의 자료 라이브러리</div>
+    <h1>은퇴·노후 강의 <span class="o">참고 영상 모음</span></h1>
+    <div class="sub">강의 주제별로 활용할 수 있는 검증된 영상·자료. 발췌 구간과 임베드 방법을 함께 정리했습니다. (계속 추가·갱신)</div>
+  </div>
+  <div class="body">
+
+    <div class="warn">
+      <b>발췌·사용 방법 (저작권 안전)</b><br>
+      영상은 방송사·크리에이터 저작물입니다. <b>다운로드해서 잘라 재업로드하면 침해</b>입니다. 대신 <b>유튜브 임베드로 특정 구간만 자동 재생</b>하세요 — 강의 덱(HTML)에 아래처럼 넣으면 됩니다.<br>
+      <code>&lt;iframe src="https://www.youtube.com/embed/영상ID?start=시작초&end=종료초&rel=0"&gt;</code><br>
+      예) 이영주 대표 영상 0:22~1:35 → <code>...embed/mCwA1tJSU6I?start=22&end=95&rel=0</code> · HTML로 띄우면 그 구간만 재생됩니다.
+    </div>
+
+    <div class="cath">① 오프닝 · 충격 (격차 · 후회 · 파산)</div>
+    <div class="vitem"><div class="vt">‘내 연금은 상위 몇 %?’ 연금 수령액 TOP 10 몰아보기</div><div class="vm">누룩지</div><div class="vu">youtube.com/watch?v=76GaqpIWtaU</div><div class="vp">같은 국민연금인데 벌어지는 노후 격차 — 오프닝 각성용. (임직원 덱 3번에 이미 연결)</div><div class="clip">추천 발췌 · 도입부 상위/하위 비교 구간</div></div>
+    <div class="vitem"><div class="vt">‘후회 없는 은퇴’를 위해 알아야 할 것들 (박영재·함익병 통합편)</div><div class="vm">얘기좀합시다</div><div class="vu">youtube.com/watch?v=YP3coURWJuw</div><div class="vp">은퇴자의 후회·동기부여. (임직원 덱 4번에 이미 연결)</div><div class="clip">추천 발췌 · ‘좀 더 일찍 알았더라면’ 언급 구간</div></div>
+    <div class="vitem"><div class="vt">내 노후가 무너졌다 — 세무 공무원 부부도 피해가지 못한 노후 파산의 전조</div><div class="vm">EBS 다큐프라임 · 골라듄다큐</div><div class="vu">youtube.com/watch?v=rRy8p9sylLk</div><div class="vp">‘준비했는데도 무너진다’ — 직장인 공감. 통합덱 오프닝 대안.</div><div class="clip">추천 발췌 · 70대 통장 잔고 공개 구간</div></div>
+    <div class="vitem"><div class="vt">잘 벌다가 한순간에 소득절벽… 은퇴자금 독하게 모으지 않으면</div><div class="vm">KBS 특집</div><div class="vu">youtube.com/watch?v=sq8Spa-9boU</div><div class="vp">소득 크레바스 개념과 직접 연결.</div><div class="clip">추천 발췌 · 소득 끊기는 전환 장면</div></div>
+
+    <div class="cath">② 연금 · 수령 전략 (조기 vs 연기)</div>
+    <div class="vitem"><div class="vt">늦게 받을수록 더 준다는데… 손해 보고도 국민연금을 당겨 받는 이유</div><div class="vm">얘기좀합시다 · 이영주 대표</div><div class="vu">youtube.com/watch?v=mCwA1tJSU6I</div><div class="vp">조기수령 심리 vs 연기 이득 — 통합덱 ‘수급개시연령/조기·연기연금’ 슬라이드에 최적.</div><div class="clip">추천 발췌 · 0:22 ~ 1:35 (대표님 지정)</div></div>
+
+    <div class="cath">③ 부동산 · 주택연금 (현금흐름 전환)</div>
+    <div class="vitem"><div class="vt">주택연금 월지급금 예시 (공식 산식 표)</div><div class="vm">한국주택금융공사(HF) 공식</div><div class="vu">hf.go.kr/ko/sub03/sub03_01_01_02.do</div><div class="vp">연령·주택가격별 실제 월지급금 — 강의 수치의 ‘공식 근거’. (영상 아님, 표 캡처용)</div><div class="clip">추천 발췌 · 연령·가격 교차표</div></div>
+
+    <div class="cath">④ 건강 · 간병 (웰다잉 ‘복도/연쇄’ 근거)</div>
+    <div class="vitem"><div class="vt">[간병의 늪 ①] ‘집 담보로 억대 빚까지’ — ‘간병 파산’ 내몰린 자녀들</div><div class="vm">MBN 뉴스7</div><div class="vu">youtube.com/watch?v=Ry73G24NFfc</div><div class="vp">부모 간병 → 자녀 재무 붕괴. ‘웰다잉이 다른 축을 무너뜨린다’ 슬라이드의 실증 영상.</div><div class="clip">추천 발췌 · 자녀가 빚지는 사례 구간</div></div>
+    <div class="vitem"><div class="vt">한 달 최대 500만 원… 간병비와 바꾼 일상</div><div class="vm">방송 뉴스</div><div class="vu">youtube.com/watch?v=s0vpuWgud5k</div><div class="vp">간병비 규모(월 100~500만)의 현실 — 예상 간병비 승수 근거.</div><div class="clip">추천 발췌 · 월 비용 언급 구간</div></div>
+    <div class="vitem"><div class="vt">80대 노인이 노인을 간병 — 노인 간병 실태 고발</div><div class="vm">KBS 시사기획 창</div><div class="vu">youtube.com/watch?v=86qqyzJ_oWk</div><div class="vp">노노(老老)간병 실태. ※ 톤이 무거워 짧은 발췌 권장.</div><div class="clip">추천 발췌 · 도입 실태 구간(짧게)</div></div>
+
+    <div class="cath">⑤ 웰다잉 · 상속 · 디지털 유산</div>
+    <div class="vitem"><div class="vt">동영상으로 보는 ‘사전연명의료의향서’ (공식 영상 모음)</div><div class="vm">국립연명의료관리기관 (공식)</div><div class="vu">lst.go.kr/addt/video.do</div><div class="vp">작성 대상·방법·효력을 공공기관이 직접 제작한 영상. 저작권 부담 없이 강의에 안내·삽입 가능. 웰다잉 파트 실무 안내용.</div><div class="clip">추천 발췌 · 작성 방법 안내 영상</div></div>
+    <div class="vitem"><div class="vt">사전연명의료의향서, 누가·어디서·어떻게 작성할까?</div><div class="vm">국립연명의료관리기관 (YouTube Shorts)</div><div class="vu">youtube.com/shorts/r2di6opEHi0</div><div class="vp">1분 내외 요약 — 강의 중 빠른 환기용.</div><div class="clip">추천 발췌 · 전체(짧음)</div></div>
+    <div class="vitem"><div class="vt">상속 재산 분할 — 법정상속 vs 유언 vs 유언대용신탁 비교·체험</div><div class="vm">KB의 생각 (자료)</div><div class="vu">kbthink.com/life/daily/inheritance-division.html</div><div class="vp">세 가지 상속 방식을 비교·체험하는 설명 자료. ‘유언대용신탁’ 개념 슬라이드 근거. (영상 아님, 캡처·인용용)</div><div class="clip">추천 발췌 · 비교 표</div></div>
+    <div class="vitem"><div class="vt">유튜브 채널도 상속될까 — 디지털 유산을 둘러싼 논란</div><div class="vm">한국경제 매거진 (자료)</div><div class="vu">magazine.hankyung.com/money/article/202503193289c</div><div class="vp">가상자산·SNS·채널 등 디지털 유산 처리 이슈 정리. ‘디지털 자산’ 항목의 최신 사례 근거. (영상 아님, 인용용)</div><div class="clip">추천 발췌 · 사례·쟁점</div></div>
+    <div class="vp" style="color:var(--muted);padding:6px 2px;margin-top:4px">※ ⑤는 저작권 안전을 위해 공공기관 공식 영상·브랜드/언론 자료 위주로 구성. 추가 영상은 계속 보강.</div>
+
+  </div>
+</div>
+</body></html>

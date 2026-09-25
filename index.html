@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LIFE 2.0 · 2막1장 강의자료</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"><style>:root{
+  --ink:#163529;--ink2:#1f4a38;--cream:#efece3;--paper:#ffffff;--paper2:#f7f5ef;
+  --orange:#d47b2c;--orange-soft:#f4e3d1;--green:#3f7a58;--green-l:#82b499;
+  --tdark:#183a2c;--muted:#6f7d73;--line:#dcd7cc;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Pretendard',sans-serif;}
+html,body{background:#888;}
+.page{width:794px;min-height:1123px;background:var(--cream);margin:0 auto;position:relative;overflow:hidden;page-break-after:always;}
+.hero{background:var(--ink);color:#fff;padding:30px 44px 26px;position:relative;overflow:hidden;}
+.hero .glow{position:absolute;top:-120px;right:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(184,150,70,.30),transparent 62%);}
+.hero .eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--green-l);position:relative;z-index:1}
+.hero h1{font-size:29px;font-weight:800;line-height:1.25;margin-top:11px;position:relative;z-index:1;letter-spacing:-.01em}
+.hero h1 .o{color:#e7b877}
+.hero .sub{font-size:13px;color:#bcccc2;margin-top:9px;position:relative;z-index:1;line-height:1.55}
+.body{padding:22px 44px 0;}
+.sec{margin-bottom:16px;}
+.sec-h{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-h .n{background:var(--orange);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:13px 15px;}
+.card.dark{background:var(--ink);border-color:var(--ink)}
+.card.soft{background:var(--orange-soft);border-color:#e7cfb4}
+.card h3{font-size:14px;font-weight:800;color:var(--tdark);line-height:1.3;margin-bottom:5px}
+.card.dark h3{color:#fff}
+.card p{font-size:11.5px;color:var(--muted);line-height:1.55}
+.card.dark p{color:#c2d1c8}
+.card.soft p{color:#8a6a44}
+.ph{width:112px;height:112px;border-radius:14px;object-fit:cover;border:2px solid rgba(255,255,255,.15)}
+.rowlist{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rowlist li{font-size:12.5px;color:var(--tdark);line-height:1.45;padding-left:17px;position:relative}
+.rowlist li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800}
+.rowlist li b{color:var(--ink);font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700;color:var(--tdark)}
+.chip.acc{background:var(--orange);border-color:var(--orange);color:#fff}
+.tl{display:flex;flex-direction:column;gap:8px}
+.trow{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 15px}
+.trow .yr{flex-shrink:0;width:92px;font-size:11.5px;font-weight:800;color:var(--orange)}
+.trow .d{font-size:12px;color:var(--tdark);line-height:1.5}
+.trow .d b{font-weight:800}
+.foot{position:absolute;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:13px 44px;display:flex;justify-content:space-between;align-items:center}
+.foot .l{font-size:13px;font-weight:800}
+.foot .l .o{color:#e7b877}
+.foot .r{font-size:11px;color:#bcccc2;text-align:right;line-height:1.6}
+.note{font-size:10.5px;color:var(--muted);line-height:1.5}
+.big{display:flex;gap:20px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:15px 18px}
+.big .k{font-size:11px;color:var(--muted);font-weight:700}
+.big .v{font-size:15px;font-weight:800;color:var(--tdark);margin-top:2px}
+
+body{background:var(--cream);}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px 60px;}
+.top{background:var(--ink);color:#fff;padding:44px 44px 40px;border-radius:0 0 20px 20px;position:relative;overflow:hidden;margin-bottom:30px}
+.top .glow{position:absolute;top:-120px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(184,150,70,.30),transparent 62%);}
+.top .eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--green-l);position:relative;z-index:1}
+.top h1{font-size:32px;font-weight:800;line-height:1.25;margin-top:12px;position:relative;z-index:1}
+.top h1 .o{color:#e7b877}
+.top .sub{font-size:14px;color:#bcccc2;margin-top:12px;position:relative;z-index:1;line-height:1.6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.top h1{font-size:25px}}
+.card2{display:block;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 22px;text-decoration:none;transition:.15s;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.card2:hover{border-color:var(--green-l);box-shadow:0 8px 22px rgba(0,0,0,.09);transform:translateY(-2px)}
+.card2 .k{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--orange)}
+.card2 h3{font-size:19px;font-weight:800;color:var(--tdark);margin-top:7px}
+.card2 p{font-size:13px;color:var(--muted);line-height:1.55;margin-top:7px}
+.card2 .go{font-size:12.5px;font-weight:800;color:var(--green);margin-top:12px}
+.card2.dark{background:var(--ink);border-color:var(--ink)}
+.card2.dark h3{color:#fff}.card2.dark p{color:#c2d1c8}.card2.dark .go{color:#e7b877}
+.foot{text-align:center;font-size:12px;color:var(--muted);margin-top:34px;line-height:1.7}
+</style></head><body>
+<div class="top">
+  <div class="glow"></div>
+  <div class="eyebrow">LIFE 2.0 · 「2막1장」 · 강의자료 허브</div>
+  <h1>은퇴·노후 <span class="o">강의자료</span></h1>
+  <div class="sub">중소·중견기업 임직원 은퇴준비 특강, 통합 강의덱, 참고영상, 강사 소개서를 한곳에서.<br>From Retire to Star — 은퇴에서 별이 되기까지.</div>
+</div>
+<div class="wrap">
+  <div class="grid">
+    <a class="card2" href="b2b/"><div class="k">LECTURE · 1시간</div><h3>임직원 은퇴준비 특강</h3><p>중소·중견기업 임직원 대상 1시간 특강(강연+진단 시연). 소득 크레바스·5축 프레임·웰다잉 연쇄.</p><div class="go">특강 덱 열기 →</div></a>
+    <a class="card2" href="ver3/"><div class="k">LECTURE · 2시간</div><h3>통합 강의덱 Ver3</h3><p>은퇴·노후·웰다잉 종합 생애설계 51장. 5층 연금·자산 고갈·5각 진단 해석.</p><div class="go">통합덱 열기 →</div></a>
+    <a class="card2" href="library/"><div class="k">LIBRARY</div><h3>참고영상 라이브러리</h3><p>강의 주제별 검증 영상 모음 + 발췌 구간·임베드 방법.</p><div class="go">라이브러리 열기 →</div></a>
+    <a class="card2" href="profile/"><div class="k">PROFILE</div><h3>강사 소개서</h3><p>홍인철(Daniel) 강사 프로필 — 자격·경력·강의 분야·커리큘럼.</p><div class="go">프로필 열기 →</div></a>
+    <a class="card2 dark" href="https://diag.lpp20.com" target="_blank" rel="noopener"><div class="k">DIAGNOSIS</div><h3>2막1장 은퇴 정밀진단</h3><p>스마트폰 42문항·약 8분. 연금 충족률·자산 고갈 나이·5각 리포트.</p><div class="go">진단 시작하기 →</div></a>
+    <a class="card2" href="profile/summary/"><div class="k">SUMMARY</div><h3>강사 소개 1장 요약</h3><p>기관 강사풀 등록·콜드메일용 1페이지 요약본.</p><div class="go">요약본 열기 →</div></a>
+  </div>
+  <div class="foot">
+    주식회사 라이프이점영 (LIFE 2.0) · 「2막1장」<br>
+    홍인철(Daniel) CSO · daniel@lpp20.com · lpp20.com<br>
+    © 2026 (주)라이프이점영. Confidential and Proprietary.
+  </div>
+</div>
+</body></html>
