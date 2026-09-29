@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LIFE 2.0 · GA 설계사 실전 강의 (40분)</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"><style>
+:root{--ink:#163529;--ink2:#1f4a38;--cream:#efece3;--paper:#ffffff;--paper2:#f7f5ef;--orange:#d47b2c;--orange-soft:#f4e3d1;--green:#3f7a58;--green-l:#82b499;--red:#b23a3a;--tdark:#183a2c;--muted:#6f7d73;--line:#dcd7cc;--scale:1;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:#0d1a14;font-family:'Pretendard',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+.deck{display:flex;flex-direction:column;align-items:center;gap:26px;padding:34px 0 60px;}
+.wrap{width:calc(1000px*var(--scale));height:calc(562.5px*var(--scale));flex-shrink:0;}
+.slide{width:1000px;height:562.5px;position:relative;overflow:hidden;transform:scale(var(--scale));transform-origin:top left;border-radius:8px;box-shadow:0 18px 50px rgba(0,0,0,.45);}
+.slide.light{background:var(--cream);}.slide.dark{background:var(--ink);}
+.slide.paper{background:#f3f2ee;}
+.slide .glow{position:absolute;top:-160px;right:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(184,150,70,.28),rgba(184,150,70,0) 62%);pointer-events:none;}
+.pad{position:absolute;inset:0;padding:40px 56px 62px;display:flex;flex-direction:column;}
+.pad.nb{padding-bottom:40px;}
+.top{display:flex;justify-content:space-between;align-items:flex-start;}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--green);text-transform:uppercase;}
+.slide.dark .eyebrow{color:var(--green-l);}
+.pageno{font-size:12.5px;font-weight:700;letter-spacing:.1em;color:#b7b0a2;}.slide.dark .pageno{color:#6f8a7c;}
+.title{font-size:30px;line-height:1.28;font-weight:800;color:var(--tdark);letter-spacing:-.01em;margin-top:16px;}.slide.dark .title{color:#f4f1ea;}
+.title.sm{font-size:26px;}
+.lead{font-size:15px;line-height:1.55;font-weight:500;color:var(--muted);margin-top:11px;max-width:860px;}.slide.dark .lead{color:#bcccc2;}
+.content{flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:14px;}
+.orange-t{color:var(--orange);}.green-t{color:var(--green);}
+.takeaway{position:absolute;left:0;right:0;bottom:0;min-height:52px;display:flex;align-items:center;padding:10px 56px;font-size:14px;font-weight:700;color:#eef3ef;background:var(--ink);letter-spacing:-.005em;line-height:1.4;}
+.takeaway.orange{background:var(--orange);color:#fff;}.takeaway b{color:#ffd9a8;font-weight:800;}.takeaway.orange b{color:#fff8ef;}
+.takeaway.green{background:var(--green);color:#fff;}.takeaway.green b{color:#eafff2;}
+.grid{display:grid;gap:16px;}.g2{grid-template-columns:1fr 1fr;}.g3{grid-template-columns:repeat(3,1fr);}.g4{grid-template-columns:repeat(4,1fr);}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;}
+.card .num{font-size:14px;font-weight:800;color:var(--orange);margin-bottom:7px;}
+.card h3{font-size:17px;font-weight:800;color:var(--tdark);line-height:1.3;margin-bottom:6px;}
+.card p{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.55;}
+.card.dark{background:var(--ink);border-color:var(--ink);}.card.dark h3{color:#fff;}.card.dark p{color:#c2d1c8;}.card.dark .num{color:var(--green-l);}
+.card.accent{background:var(--orange);border-color:var(--orange);}.card.accent h3,.card.accent .num{color:#fff;}.card.accent p{color:#fdeede;}
+.card.soft{background:var(--orange-soft);border-color:#e7cfb4;}
+.card.gsoft{background:#e6f0ea;border-color:#c8ddd0;}
+.klabel{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}.slide.dark .klabel{color:#8fa89c;}
+.pill{display:inline-block;padding:5px 14px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.02em;background:var(--ink);color:#e7d4ac;}
+.pill.g{background:var(--green);color:#fff;}.pill.o{background:var(--orange);color:#fff;}.pill.teal{background:var(--green-l);color:#0e2b1e;}
+.hero{font-size:40px;font-weight:800;line-height:1.3;color:#f4f1ea;letter-spacing:-.01em;}.hero .o{color:var(--orange);}.hero .g{color:var(--green-l);}
+.chip{padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--paper);border:1px solid var(--line);color:var(--tdark);}
+.chip.acc{background:var(--orange);color:#fff;border-color:var(--orange);}
+.badge{background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--tdark);}
+.badge b{color:var(--green);font-weight:800;}
+table.t{width:100%;border-collapse:collapse;font-size:13px;background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+table.t th{background:var(--ink);color:#fff;font-weight:700;padding:11px 12px;text-align:center;font-size:12.5px;}
+table.t td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--line);color:var(--tdark);}
+table.t tr:last-child td{border-bottom:none;}
+table.t tr.hl td{background:var(--orange-soft);font-weight:700;}
+table.t tr.sum td{background:var(--green);color:#fff;font-weight:800;}
+table.t td.lbl{background:var(--paper2);font-weight:800;}
+.videobox{background:#0e211a;border:1.5px solid #2e5544;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8fa89c;position:relative;text-decoration:none;cursor:pointer;}
+.videobox:hover{border-color:var(--orange);}
+.videobox .play{width:60px;height:60px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.videobox .play::after{content:'';border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px;}
+.vchip{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:700;background:#0e211a;border:1px solid #2e5544;color:#cfe6d9;text-decoration:none;}
+.vchip:hover{border-color:var(--orange);color:#fff;}
+.vchip .d{width:22px;height:22px;border-radius:50%;background:var(--orange);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.vchip .d::after{content:'';border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px;}
+.script{background:var(--paper2);border-left:3px solid var(--orange);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--tdark);line-height:1.6;}.script b{color:var(--orange);}
+.tl{display:flex;flex-direction:column;gap:9px;}
+.tl .row{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 16px;}
+.tl .tm{font-size:13px;font-weight:800;color:var(--muted);width:52px;flex-shrink:0;}
+.tl .tag{flex-shrink:0;}
+.tl .tx{font-size:14px;font-weight:800;color:var(--tdark);}
+.tl .sub{font-size:12px;color:var(--muted);margin-left:auto;text-align:right;max-width:420px;}
+.counter{position:fixed;right:16px;bottom:14px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;z-index:50;letter-spacing:.05em;}
+@media print{@page{size:1000px 562.5px;margin:0;}html,body{background:#fff;}.deck{gap:0;padding:0;}.wrap{width:1000px;height:562.5px;}.slide{transform:none;border-radius:0;box-shadow:none;break-after:page;page-break-after:always;}.counter{display:none;}}
+</style></head><body>
+<div class="deck" id="deck">
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+  <div class="top"><div class="eyebrow">GA 설계사 실전 강의 · 40분 · 2026</div>
+    <div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#f4f1ea;letter-spacing:.06em">LIFE 2.0</div><div style="font-size:11px;color:#8fa89c;margin-top:2px">생애설계 교육센터</div></div></div>
+  <div class="content" style="justify-content:center">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><div style="width:34px;height:2px;background:var(--orange)"></div>
+      <div style="font-size:14px;font-weight:700;color:#bcccc2">진단 기반 상담 · 고객이 스스로 말하게 만드는 도구</div></div>
+    <div class="hero" style="font-size:50px;line-height:1.22">관점을 바꾸면<br><span class="o">상담이 바뀝니다</span></div>
+    <div style="margin-top:22px"><a class="vchip" href="https://www.youtube.com/watch?v=mCwA1tJSU6I&start=22&end=95&rel=0" target="_blank" rel="noopener"><span class="d"></span>여는 영상 · 이영주 대표 (0:22~1:35)</a></div>
+  </div>
+  <div style="position:absolute;left:56px;bottom:26px;font-size:11.5px;color:#6f8a7c;line-height:1.7">주식회사 라이프 2.0 · 생애설계 교육센터<br>불완전판매는 계약이 아니라 부채입니다 · From Retire to Star</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Agenda · 오늘 40분</div><div class="pageno">02</div></div>
+  <h2 class="title">강의를 <span class="orange-t">듣는 시간</span>이 아니라, 내일 현장에서 쓸 <span class="green-t">도구를 손에 넣는 시간</span></h2>
+  <div class="content" style="justify-content:flex-start;margin-top:14px">
+    <div class="grid" style="grid-template-columns:1.15fr .85fr;gap:16px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 18px"><div style="width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">1</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">고객은 왜 거절하는가</div><div style="font-size:12px;color:var(--muted);margin-top:2px">상품이 아니라 인식의 문제입니다</div></div><div style="font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0">20분</div></div>
+        <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 18px"><div style="width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">2</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">관점 전환 프레임</div><div style="font-size:12px;color:var(--muted);margin-top:2px">자산에서 연금으로, 잔고에서 현금흐름으로</div></div><div style="font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0">20분</div></div>
+        <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 18px"><div style="width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">3</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">2막 1장 진단 실습</div><div style="font-size:12px;color:var(--muted);margin-top:2px">직접 진단하고 롤플레이합니다</div></div><div style="font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0">35분</div></div>
+        <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 18px"><div style="width:30px;height:30px;border-radius:9px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">4</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">제휴 제안</div><div style="font-size:12px;color:var(--muted);margin-top:2px">라이프 2.0과 무엇을 함께 하는가</div></div><div style="font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0">15분</div></div>
+      </div>
+      <div class="card dark" style="height:100%"><div class="klabel" style="color:var(--green-l)">오늘 가져가시는 것</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:8px;font-size:12.5px;color:#cfe6d9;line-height:1.5">
+          <div>① 고객의 거절을 상담으로 바꾸는 대화 순서</div>
+          <div>② 40문항 7분짜리 진단 도구 사용법</div>
+          <div>③ 진단 리포트를 니즈 환기로 연결하는 스크립트</div>
+          <div>④ 2막 1장 제휴 파트너 참여 조건</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway">오늘 진단 도구는 <b>실물 시연</b>입니다. 휴대폰을 준비해 주세요.</div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 01 · GA 설계사 실전 강의</div><div class="pageno">03</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 01</div>
+        <div class="hero" style="font-size:50px">Why They Say No</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">고객은 왜 거절하는가</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">01</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 01 · 문제 정의</div><div class="pageno">04</div></div>
+  <h2 class="title">거절은 상품 때문이 아닙니다. <span class="orange-t">순서 때문입니다</span></h2>
+  <div class="content">
+    <div class="grid g2" style="align-items:stretch">
+      <div class="card"><div class="klabel">기존 순서</div><div style="font-size:20px;font-weight:800;color:var(--tdark);margin:4px 0 10px">상품 → 필요성</div>
+        <div class="script" style="border-color:#9aa39c;border-left-color:#9aa39c">&ldquo;좋은 연금 상품이 나왔습니다&rdquo;<br>→ 고객: &ldquo;지금은 여유가 없어서요&rdquo;</div>
+        <p style="margin-top:10px;color:var(--muted);font-size:12px">고객이 아직 문제를 느끼지 못한 상태에서 해답부터 제시하니, 방어부터 하게 됩니다.</p></div>
+      <div class="card" style="border-color:var(--green)"><div class="klabel" style="color:var(--green)">바꿀 순서</div><div style="font-size:20px;font-weight:800;color:var(--green);margin:4px 0 10px">진단 → 문제 → 상품</div>
+        <div class="script">&ldquo;7분이면 됩니다. 한번 해보시겠습니까?&rdquo;<br>→ 고객: &ldquo;내 자산이 몇 살에 바닥나요?&rdquo;</div>
+        <p style="margin-top:10px;color:var(--muted);font-size:12px">고객이 스스로 부족액을 발견하면, 해답을 요구하는 쪽이 고객으로 바뀝니다.</p></div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card" style="padding:13px 16px"><div style="font-size:13px;font-weight:800;color:var(--tdark)">설계사가 말한다</div><p style="margin-top:3px">고객은 듣는 입장 &mdash; 방어 · 기억에 남지 않음</p></div>
+      <div class="card" style="padding:13px 16px"><div style="font-size:13px;font-weight:800;color:var(--green)">숫자가 말한다</div><p style="margin-top:3px">고객은 확인하는 입장 &mdash; 수용 · 본인 숫자라 반박 불가</p></div>
+      <div class="card" style="padding:13px 16px"><div style="font-size:13px;font-weight:800;color:var(--orange)">고객이 말한다</div><p style="margin-top:3px">고객이 결론을 내림 &mdash; 결정 · &ldquo;어떻게 해야 하죠?&rdquo;</p></div>
+    </div>
+  </div>
+  <div class="takeaway">오늘 배우실 것은 새로운 화법이 아니라, <b>고객이 스스로 말하게 만드는 도구</b>입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 01 · 고객 현실</div><div class="pageno">05</div></div>
+  <h2 class="title sm">고객은 &ldquo;돈이 없다&rdquo;가 아니라 <span class="orange-t">&ldquo;돈이 묶여 있다&rdquo;</span></h2>
+  <div class="content" style="margin-top:8px">
+    <div class="grid" style="grid-template-columns:1.5fr 1fr;gap:18px;align-items:start">
+      <div>
+        <table class="t">
+          <tr><th>구분</th><th>총자산</th><th>실물자산(비중)</th><th>금융(비중)</th><th>부채</th></tr>
+          <tr><td class="lbl">50대</td><td>6.6억원</td><td>5.0억(76%)</td><td style="color:var(--green);font-weight:700">1.6억(24%)</td><td>1.1억</td></tr>
+          <tr><td class="lbl">60대</td><td>6.0억원</td><td>4.9억(82%)</td><td style="color:var(--orange);font-weight:700">1.1억(18%)</td><td>0.7억</td></tr>
+        </table>
+        <div class="card" style="margin-top:14px"><div class="klabel">이 표에서 설계사가 읽어야 할 것</div>
+          <div style="font-size:12.5px;color:var(--tdark);line-height:1.7">&ldquo;여유가 없다&rdquo;는 말의 실체 &mdash; 총자산 6억인데 현금성 자산은 1.1억. 금융자산 비중은 <b>24% → 18%</b>로 계속 줄어듭니다.</div>
+        </div>
+        <div style="margin-top:12px"><a class="vchip" href="https://www.youtube.com/watch?v=rRy8p9sylLk" target="_blank" rel="noopener"><span class="d"></span>영상 · 70대 통장 잔고 공개 (EBS)</a></div>
+      </div>
+      <div class="card dark" style="text-align:center"><div class="klabel" style="color:var(--green-l)">고객이 하는 말</div>
+        <div style="font-size:19px;font-weight:800;color:#fff;line-height:1.5;margin:10px 0 14px">&ldquo;집도 있고<br>6억이나 있는데<br>왜 이렇게 쪼들리지?&rdquo;</div>
+        <div style="height:1px;background:#2e5544;margin:8px 0"></div>
+        <div style="font-size:14px;font-weight:800;color:#cfe6d9;margin-top:10px">자산은 있는데 현금흐름이 없는 상태</div>
+        <p style="color:#c2d1c8;margin-top:8px">이 문장을 고객 입에서 나오게 하는 것이 오늘 도구의 목적입니다.</p>
+      </div>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 01 · 소득 크레바스</div><div class="pageno">06</div></div>
+  <h2 class="title">정년 60세, 연금 63~65세 <span class="orange-t">그 사이가 비어 있습니다</span></h2>
+  <div class="content">
+    <div style="display:flex;border-radius:10px;overflow:hidden;margin-bottom:6px">
+      <div style="flex:2;background:var(--green);color:#fff;text-align:center;padding:12px;font-weight:700;font-size:13px">재직기간</div>
+      <div style="flex:1.1;background:var(--orange);color:#fff;text-align:center;padding:12px;font-weight:700;font-size:13px">소득공백 (최대 5년)</div>
+      <div style="flex:1.2;background:var(--ink);color:#fff;text-align:center;padding:12px;font-weight:700;font-size:13px">연금 수령 (종신)</div>
+    </div>
+    <div style="display:flex;font-size:11.5px;color:var(--muted);margin-bottom:16px"><div style="flex:2">55세</div><div style="flex:1.1;text-align:center">60세 정년</div><div style="flex:1.2;text-align:center">64세 수급개시</div><div style="width:40px;text-align:right">종신</div></div>
+    <div class="grid g3">
+      <div class="card"><div class="pill o" style="align-self:flex-start;margin-bottom:10px">무급 구간</div><div style="font-size:30px;font-weight:800;color:var(--orange)">최대 5년</div><p style="margin-top:8px">1965~68년생 64세, 1969년생 이후 65세부터 국민연금이 개시됩니다.</p></div>
+      <div class="card"><div class="pill" style="align-self:flex-start;margin-bottom:10px">필요 자금</div><div style="font-size:30px;font-weight:800;color:var(--tdark)">약 1.8억원</div><p style="margin-top:8px">월 생활비 300만원 가정 시 5년간 필요한 총액입니다.</p></div>
+      <div class="card"><div class="pill g" style="align-self:flex-start;margin-bottom:10px">구조적 문제</div><div style="font-size:30px;font-weight:800;color:var(--green)">2층이 먼저 소진</div><p style="margin-top:8px">이 공백을 퇴직금으로 메우면 노후 연금의 한 층이 사라집니다.</p></div>
+    </div>
+    <div style="margin-top:14px"><a class="vchip" href="https://www.youtube.com/watch?v=sq8Spa-9boU" target="_blank" rel="noopener"><span class="d"></span>관련 영상 · 소득이 끊기는 전환 장면 (KBS)</a></div>
+  </div>
+  <div class="takeaway green"><b>&ldquo;퇴직하고 연금 나올 때까지 몇 년 비시죠?&rdquo;</b> &mdash; 이 질문 하나로 상담이 시작됩니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 01 · 공적연금의 한계</div><div class="pageno">07</div></div>
+  <h2 class="title sm">평균 68만원. 그런데 <span class="orange-t">이 숫자를 그대로 쓰면 안 됩니다</span></h2>
+  <div class="content" style="margin-top:6px">
+    <div class="grid" style="grid-template-columns:1.25fr 1fr;gap:18px;align-items:stretch">
+      <div class="card" style="padding:18px"><div class="klabel">국민연금 월수령액 (2025년 기준) · 단위 만원</div>
+        <div style="display:flex;gap:10px;height:190px;align-items:flex-end;margin-top:10px">
+          <div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:var(--green);margin-bottom:6px">68</div><div style="width:52px;height:66px;background:var(--green);border-radius:6px 6px 0 0"></div><div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">평균</div></div><div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:#9aa39c;margin-bottom:6px">44</div><div style="width:52px;height:44px;background:#9aa39c;border-radius:6px 6px 0 0"></div><div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">20년 미만</div></div><div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:var(--green-l);margin-bottom:6px">112</div><div style="width:52px;height:110px;background:var(--green-l);border-radius:6px 6px 0 0"></div><div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">20년 이상</div></div><div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:var(--orange);margin-bottom:6px">318</div><div style="width:52px;height:180px;background:var(--orange);border-radius:6px 6px 0 0"></div><div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">최고</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div class="card" style="padding:14px 16px"><h3 style="font-size:15px">가입기간이 전부다</h3><p style="margin-top:5px">44만원과 112만원의 차이를 만든 건 소득이 아니라 납부 개월 수입니다.</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="font-size:15px">상한이 있다</h3><p style="margin-top:5px">2026.7~2027.6 기준소득월액 상한은 월 659만원. 그 이상 소득은 반영되지 않습니다.</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="font-size:15px">그래서 2·3층이다</h3><p style="margin-top:5px">고소득 고객일수록 국민연금만으로는 소득대체율이 떨어집니다. 여기가 우리 자리입니다.</p></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><div style="font-size:11px;color:var(--muted)">출처: 「지식한상」 송영욱 강사 강의 도표 · 2026년 평균은 약 69.8만원</div><a class="vchip" href="https://www.youtube.com/watch?v=76GaqpIWtaU" target="_blank" rel="noopener"><span class="d"></span>영상 · 내 연금은 상위 몇 %?</a></div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 02 · GA 설계사 실전 강의</div><div class="pageno">08</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 02</div>
+        <div class="hero" style="font-size:50px">From Asset to Income</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">관점 전환 · 자산에서 연금으로</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">02</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 02 · 프레임</div><div class="pageno">09</div></div>
+  <h2 class="title">&ldquo;얼마를 모을까&rdquo;에서 <span class="green-t">&ldquo;매달 얼마가 들어오게 할까&rdquo;</span>로</h2>
+  <div class="content">
+    <div class="grid g2" style="align-items:stretch">
+      <div class="card" style="background:#f0efeb;text-align:center"><div class="pill" style="background:#9aa39c;color:#fff;align-self:center;margin-bottom:12px">&lang;자산&rang; 중심의 관리</div>
+        <div style="font-size:17px;font-weight:800;color:var(--tdark)">대부분 부동산 자산</div><div style="font-size:12px;color:var(--muted);margin:3px 0 12px">(현금 부족 문제 발생)</div>
+        <div style="font-size:20px;font-weight:800;color:var(--tdark);line-height:1.4">&ldquo;일 안 해도 살 수 있게<br>10억을 만든다&rdquo;</div>
+        <div class="pill" style="background:#8a7d6b;color:#fff;align-self:center;margin-top:12px">도달 불가 · 인출 계획 없음</div></div>
+      <div class="card" style="background:#e6f0ea;border-color:var(--green);text-align:center"><div class="pill g" style="align-self:center;margin-bottom:12px">&lang;연금&rang; 중심의 관리</div>
+        <div style="font-size:17px;font-weight:800;color:var(--tdark)">대부분 4층 연금</div><div style="font-size:12px;color:var(--muted);margin:3px 0 12px">(국민 / 퇴직 / 개인 / 주택연금)</div>
+        <div style="font-size:20px;font-weight:800;color:var(--green);line-height:1.4">&ldquo;매월 500만원의 연금이<br>나오게 한다&rdquo;</div>
+        <div class="pill g" style="align-self:center;margin-top:12px">부족액이 즉시 계산됨</div></div>
+    </div>
+  </div>
+  <div class="takeaway green">부족액이 계산되는 순간, 상담은 <b>설득이 아니라 해결</b>이 됩니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 02 · 4층 연금</div><div class="pageno">10</div></div>
+  <h2 class="title sm">4층을 다 쌓으면 월 <span class="green-t">550만원</span></h2>
+  <div class="content" style="margin-top:10px">
+    <div class="grid" style="grid-template-columns:1.6fr 1fr;gap:18px;align-items:start">
+      <table class="t" style="font-size:12.5px">
+        <tr><th>구분</th><th>납입기준</th><th>30년 후 매월</th><th>수령기간</th></tr>
+        <tr><td class="lbl">국민연금</td><td>월급의 9% 적립</td><td>100만원</td><td>죽을때까지</td></tr>
+        <tr><td class="lbl">퇴직연금</td><td>연봉의 8.3% 적립</td><td>80만원</td><td>30년</td></tr>
+        <tr class="hl"><td class="lbl" style="background:transparent">개인연금</td><td>매월 75만원 적립</td><td style="color:var(--green);font-weight:800">250만원</td><td>30년</td></tr>
+        <tr><td class="lbl">주택연금</td><td>주택가격 5억, 65세 수령</td><td>120만원</td><td>죽을때까지</td></tr>
+        <tr class="sum"><td>합계</td><td></td><td>550만원</td><td></td></tr>
+      </table>
+      <div class="card gsoft"><div class="pill g" style="align-self:flex-start;margin-bottom:8px">우리의 자리</div><div style="font-size:34px;font-weight:800;color:var(--orange)">250만원</div><div style="font-size:13px;font-weight:700;color:var(--tdark);margin-bottom:10px">3층 · 개인연금</div><p style="color:var(--tdark)">550만원 중 250만원, 전체의 45%가 3층에서 나옵니다. 1·2·4층은 제도가 정해주지만 3층만은 고객의 선택입니다.</p></div>
+    </div>
+    <div class="card soft" style="margin-top:12px;padding:11px 18px"><p style="color:var(--tdark);font-size:11.5px">※ 시뮬레이션(연 3% 운용 가정) 결과로 개인별 수령액과 다를 수 있습니다. (고객 상담 시 안내)</p></div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 02 · 핵심 논리</div><div class="pageno">11</div></div>
+  <h2 class="title sm">95세까지 살면 <span class="orange-t">이 표는 무너집니다</span></h2>
+  <div class="lead">오늘 배우실 것 중 현장에서 가장 강력한 한 장입니다.</div>
+  <div class="content" style="margin-top:8px">
+    <div style="position:relative;height:16px;margin-bottom:6px"><span style="position:absolute;left:0;font-size:11.5px;color:var(--muted)">65세</span><span style="position:absolute;left:65%;transform:translateX(-50%);font-size:11.5px;color:var(--orange);font-weight:700">95세</span><span style="position:absolute;right:0;font-size:11.5px;color:var(--muted)">100세+</span></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:65%;background:var(--green);border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">개인연금 250만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--orange)">30년 후 종료</div></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:65%;background:var(--green-l);border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">퇴직연금 80만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--orange)">30년 후 종료</div></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--ink);border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">국민연금 100만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:#cfe6d9">종신 · 물가연동</div></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:100%;background:#2f5f45;border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">주택연금 120만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:#cfe6d9">종신 · 정액</div></div>
+    <div class="grid g3" style="margin-top:13px">
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--green)">550만원 <span style="font-size:11px;color:var(--muted);font-weight:600">65~95세</span></div><p style="margin-top:3px">4층이 모두 작동하는 30년입니다.</p></div>
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--orange)">220만원 <span style="font-size:11px;color:var(--muted);font-weight:600">95세 이후</span></div><p style="margin-top:3px">종신형 두 층만 남습니다.</p></div>
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--red)">-60% <span style="font-size:11px;color:var(--muted);font-weight:600">감소폭</span></div><p style="margin-top:3px">확정기간형이 끝나는 순간의 낙차입니다.</p></div>
+    </div>
+  </div>
+  <div class="takeaway green"><b>&ldquo;그래서 종신형이 필요합니다&rdquo;</b> &mdash; 이 결론을 설계사가 아니라 고객이 내리게 하는 것이 목표입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 02 · 구조 해부</div><div class="pageno">12</div></div>
+  <h2 class="title sm">종신 지급형 연금은 <span class="green-t">실제로 어떻게 생겼는가</span></h2>
+  <div class="lead">실제 가입제안서 사례 · 51세 남성 / 월 100만원 10년납 / 66세 개시 / 종신 지급형</div>
+  <div class="content" style="margin-top:10px">
+    <div class="grid" style="grid-template-columns:1.5fr 1fr;gap:18px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;background:var(--ink);color:#fff;border-radius:9px;overflow:hidden"><div style="flex:1;padding:11px 16px;font-size:13px">총 납입 보험료</div><div style="padding:11px 16px;font-size:14px;font-weight:800">1억 2,000만원</div><div style="padding:11px 14px;font-size:11px;color:#8fa89c;display:flex;align-items:center">월 100만원 × 120회</div></div>
+        <div style="display:flex;background:#20493a;color:#fff;border-radius:9px;overflow:hidden"><div style="flex:1;padding:11px 16px;font-size:13px">연금개시 시 계약자적립액</div><div style="padding:11px 16px;font-size:14px;font-weight:800">1억 2,000만원</div><div style="padding:11px 14px;font-size:11px;color:#8fa89c;display:flex;align-items:center">원금 수준</div></div>
+        <div style="display:flex;background:#20493a;color:#fff;border-radius:9px;overflow:hidden"><div style="flex:1;padding:11px 16px;font-size:13px">연금개시 시 연금기준금액</div><div style="padding:11px 16px;font-size:14px;font-weight:800;color:var(--green-l)">2억 435만원</div><div style="padding:11px 14px;font-size:11px;color:#8fa89c;display:flex;align-items:center">지급의 기준</div></div>
+        <div style="display:flex;background:var(--ink);color:#fff;border-radius:9px;overflow:hidden"><div style="flex:1;padding:11px 16px;font-size:13px">연 지급액 (종신)</div><div style="padding:11px 16px;font-size:14px;font-weight:800;color:var(--green-l)">1,011만원</div><div style="padding:11px 14px;font-size:11px;color:#8fa89c;display:flex;align-items:center">월 약 84만원·99세까지</div></div>
+      </div>
+      <div class="card gsoft"><p style="color:var(--tdark);font-size:12.5px">이 한 줄이 핵심입니다.</p><div style="font-size:17px;font-weight:800;color:var(--green);line-height:1.4;margin:8px 0 10px">적립금은 1.2억,<br>연금기준금액은 2.04억</div><p style="color:var(--tdark);line-height:1.6">같은 계약을 「자산」으로 보면 원금이지만, 「연금」으로 보면 1.7배입니다. 관점 전환이 상품 구조 안에 그대로 들어 있습니다.</p></div>
+    </div>
+    <div style="font-size:10.5px;color:var(--muted);margin-top:10px">출처: KDB생명 「더!행복플러스연금보험(보증형)(무)」 가입제안서 (2026.08.07 발행) · 예시 수치이며 실제 계약 조건에 따라 달라집니다.</div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 02 · 컴플라이언스</div><div class="pageno">13</div></div>
+  <h2 class="title">팔기 전에 <span class="orange-t">반드시 말해야 하는 세 가지</span></h2>
+  <div class="lead">이것을 먼저 말하는 설계사가 결국 더 오래 갑니다. 불완전판매는 계약이 아니라 부채입니다.</div>
+  <div class="content" style="margin-top:6px">
+    <div class="grid g3">
+      <div class="card"><div style="width:26px;height:26px;border-radius:50%;background:var(--green-l);color:#0e2b1e;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;margin-bottom:10px">1</div><h3 style="line-height:1.35">중도해지하면 <span style="color:var(--green)">크게 손해</span></h3><p style="margin-top:8px">납입 10년 시점 환급률 약 50%, 14년차(65세)에는 약 35%까지 내려갑니다. 연금개시 시점에야 원금 수준으로 회복됩니다.</p></div>
+      <div class="card"><div style="width:26px;height:26px;border-radius:50%;background:var(--green-l);color:#0e2b1e;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;margin-bottom:10px">2</div><h3 style="line-height:1.35">원금 회수까지 <span style="color:var(--orange)">약 12년</span></h3><p style="margin-top:8px">연 1,011만원 기준 누적 납입액 1.2억을 넘어서는 시점은 약 78세입니다. &lsquo;언제 본전인가&rsquo;를 고객이 묻기 전에 먼저 말하세요.</p></div>
+      <div class="card"><div style="width:26px;height:26px;border-radius:50%;background:var(--green-l);color:#0e2b1e;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;margin-bottom:10px">3</div><h3 style="line-height:1.35">최저보증이율은 <span style="color:var(--green)">내려간다</span></h3><p style="margin-top:8px">계약 후 10년 이하 연복리 1.0%, 10년 초과 0.5%. 공시이율(2026.8 현재 2.0%)이 하락하면 적립액과 연금액도 함께 움직입니다.</p></div>
+    </div>
+    <div class="card soft" style="margin-top:14px;padding:12px 18px"><p style="color:var(--tdark);font-size:12px;line-height:1.5">이 구조에는 고객이 잘 모르는 방어막도 있습니다 &mdash; <b style="color:var(--orange)">85세까지는 「받은 연금 누계 + 최저사망적립액」이 항상 연금기준금액 2.04억을 유지</b>합니다. 일찍 사망해도 총액은 보전된다는 뜻입니다.</p></div>
+  </div>
+  <div class="takeaway green">단점을 먼저 말하면 장점이 믿어집니다. <b>이게 진단 기반 상담의 진짜 무기입니다.</b></div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 03 · GA 설계사 실전 강의</div><div class="pageno">14</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 03</div>
+        <div class="hero" style="font-size:50px">The Tool in Action</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">2막 1장 진단 · 시연과 실습</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">03</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 03 · 도구 소개</div><div class="pageno">15</div></div>
+  <h2 class="title">40문항, 7분. <span class="green-t">고객이 스스로 답을 찾는 도구</span></h2>
+  <div class="content">
+    <div class="grid" style="grid-template-columns:1fr 1.35fr;gap:18px;align-items:start">
+      <div class="card dark"><div class="pill teal" style="align-self:flex-start;margin-bottom:10px">LIFE 2.0 · ACT II</div>
+        <div style="font-size:20px;font-weight:800;color:#fff">2막 1장 은퇴 정밀진단</div><div style="font-size:12px;color:#8fa89c;margin:3px 0 14px">Ver.21 · 모바일 웹 · 설치 불필요</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#cfe6d9">
+          <div>■ PART 1 기본정보</div><div>■ PART 2 건강 · 보험</div><div>■ PART 3 주거 · 부동산</div><div>■ PART 4 자산정보</div><div>■ PART 5 일자리</div><div>■ PART 6 웰다잉</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card" style="flex-direction:row;align-items:center;gap:16px;padding:14px 18px"><div style="flex:1"><div style="font-size:11px;font-weight:800;color:var(--green)">산출물 1</div><p style="margin-top:3px;color:var(--muted)">6개 영역 중 가장 약한 곳이 어디인지 한눈에 나옵니다. 총점보다 편차가 중요합니다.</p></div><div style="font-size:16px;font-weight:800;color:var(--tdark);flex-shrink:0">은퇴 점수</div></div>
+        <div class="card" style="flex-direction:row;align-items:center;gap:16px;padding:14px 18px"><div style="flex:1"><div style="font-size:11px;font-weight:800;color:var(--green)">산출물 2</div><p style="margin-top:3px;color:var(--muted)">지금처럼 쓰면 몇 살에 바닥나는지 그래프로 보여줍니다. 상담에서 가장 반응이 큰 화면입니다.</p></div><div style="font-size:16px;font-weight:800;color:var(--tdark);flex-shrink:0">자산 고갈 예측</div></div>
+        <div class="card" style="flex-direction:row;align-items:center;gap:16px;padding:14px 18px"><div style="flex:1"><div style="font-size:11px;font-weight:800;color:var(--green)">산출물 3</div><p style="margin-top:3px;color:var(--muted)">생활비를 줄이면, 더 일하면, 연금을 더하면 &mdash; 조건을 바꿔 즉시 비교합니다.</p></div><div style="font-size:16px;font-weight:800;color:var(--tdark);flex-shrink:0">What-if 시뮬레이션</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway">개인정보 안내 &mdash; <b>이름은 별명·이니셜로 입력 가능</b>하며, 연락처는 선택 항목입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 03 · 실습 ①</div><div class="pageno">16</div></div>
+  <h2 class="title">먼저 본인이 <span class="green-t">고객이 되어 보세요</span></h2>
+  <div class="lead">12분 · 개인 진단 &mdash; 고객에게 권하기 전에 스스로 경험해 보는 것이 가장 빠른 학습입니다.</div>
+  <div class="content" style="margin-top:6px">
+    <div class="grid g4">
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">1. 접속</div><div style="padding:13px 15px"><p style="line-height:1.55;text-align:center">화면의 QR 코드를 촬영하거나 단축 주소로 접속합니다. 앱 설치는 필요 없습니다.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">2. 응답</div><div style="padding:13px 15px"><p style="line-height:1.55;text-align:center">40문항에 답합니다. 정확한 금액이 기억나지 않으면 대략 구간으로 답하셔도 됩니다.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">3. 확인</div><div style="padding:13px 15px"><p style="line-height:1.55;text-align:center">은퇴 점수 → 자산 고갈 예측 → What-if 순서로 결과를 확인합니다.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">4. 기록</div><div style="padding:13px 15px"><p style="line-height:1.55;text-align:center">워크시트 A에 ① 가장 낮은 영역 ② 고갈 예상 연령 ③ 가장 효과가 컸던 변수를 적습니다.</p></div></div>
+    </div>
+    <div class="card gsoft" style="margin-top:14px"><div class="klabel" style="color:var(--green)">진행하시면서 두 가지를 관찰해 주십시오</div>
+      <p style="color:var(--tdark);line-height:1.7;margin-top:4px">① 어느 문항에서 손이 멈추는가 &mdash; 고객도 같은 지점에서 멈춥니다. 그 문항이 곧 니즈입니다.<br>② 결과 화면 중 어느 장면에서 마음이 움직이는가 &mdash; 그 화면이 상담에서 보여줄 화면입니다.</p></div>
+  </div>
+  <div class="takeaway">직접 해보지 않은 도구는 권할 수 없습니다. <b>오늘 12분이 그 조건을 만듭니다.</b></div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 03 · 실습 ②</div><div class="pageno">17</div></div>
+  <h2 class="title">2인 1조 <span class="green-t">상담 롤플레이</span></h2>
+  <div class="lead">18분 · 역할을 바꿔 각 9분씩 &mdash; 설계사 / 고객</div>
+  <div class="content" style="margin-top:6px"><div style="display:flex;flex-direction:column;gap:8px">
+    <div class="tl-row" style="display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 16px"><div style="font-size:13px;font-weight:800;color:var(--muted);width:48px;flex-shrink:0">00:00</div><div class="pill" style="background:var(--green-l);color:#fff;flex-shrink:0;font-size:11px">권유</div><div style="font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0;width:180px">7분이면 됩니다</div><div style="font-size:11.5px;color:var(--muted);margin-left:auto;text-align:right">상품 이야기를 꺼내지 않습니다. 진단을 권하는 것으로만 시작합니다.</div></div>
+    <div class="tl-row" style="display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 16px"><div style="font-size:13px;font-weight:800;color:var(--muted);width:48px;flex-shrink:0">01:00</div><div class="pill" style="background:var(--green);color:#fff;flex-shrink:0;font-size:11px">진행</div><div style="font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0;width:180px">옆에서 함께 본다</div><div style="font-size:11.5px;color:var(--muted);margin-left:auto;text-align:right">고객이 답하는 동안 손이 멈추는 문항을 기억합니다. 대신 답해 주지 않습니다.</div></div>
+    <div class="tl-row" style="display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 16px"><div style="font-size:13px;font-weight:800;color:var(--muted);width:48px;flex-shrink:0">05:00</div><div class="pill" style="background:var(--ink);color:#fff;flex-shrink:0;font-size:11px">해석</div><div style="font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0;width:180px">어디가 제일 낮게 나왔나요?</div><div style="font-size:11.5px;color:var(--muted);margin-left:auto;text-align:right">점수를 평가하지 않습니다. 고객이 스스로 읽게 합니다.</div></div>
+    <div class="tl-row" style="display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 16px"><div style="font-size:13px;font-weight:800;color:var(--muted);width:48px;flex-shrink:0">07:00</div><div class="pill" style="background:var(--ink);color:#fff;flex-shrink:0;font-size:11px">전환</div><div style="font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0;width:180px">What-if를 함께 돌린다</div><div style="font-size:11.5px;color:var(--muted);margin-left:auto;text-align:right">&ldquo;생활비 30만원 줄이면요?&rdquo; &ldquo;3년 더 일하면요?&rdquo; &mdash; 고객이 변수를 고르게 합니다.</div></div>
+    <div class="tl-row" style="display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 16px"><div style="font-size:13px;font-weight:800;color:var(--muted);width:48px;flex-shrink:0">08:30</div><div class="pill" style="background:var(--orange);color:#fff;flex-shrink:0;font-size:11px">마무리</div><div style="font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0;width:180px">이 부족액, 다음에 같이 볼까요?</div><div style="font-size:11.5px;color:var(--muted);margin-left:auto;text-align:right">이 자리에서 상품을 제안하지 않습니다. 다음 약속만 잡습니다.</div></div>
+  </div></div>
+  <div class="takeaway green">이 실습의 유일한 금지 사항 &mdash; <b>9분 안에 상품명을 말하지 않는 것.</b> 말하고 싶어지는 순간을 견디는 것이 훈련의 목적입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 03 · 현장 적용</div><div class="pageno">18</div></div>
+  <h2 class="title sm">기존 3회 상담을 <span class="green-t">진단 기반으로 다시 짜면</span></h2>
+  <div class="content" style="margin-top:10px">
+    <table class="t" style="font-size:12.5px">
+      <tr><th>구분</th><th>기존 방식</th><th style="background:var(--green)">진단 기반 전환</th><th>무엇이 달라지는가</th></tr>
+      <tr><td class="lbl">1차</td><td>상품 제안서 전달</td><td>진단 실시 · 부족액 확인만</td><td>고객이 문제를 소유합니다.</td></tr>
+      <tr><td class="lbl">2차</td><td>수익률 · 환급률 설명</td><td>4층 진단표 함께 작성</td><td>빈칸이 드러나면 질문이 나옵니다.</td></tr>
+      <tr><td class="lbl">3차</td><td>클로징 시도</td><td>빈칸을 메우는 대안 비교</td><td>고객이 요구해서 하는 설명이 됩니다.</td></tr>
+    </table>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card" style="padding:13px 16px"><div style="font-size:13px;font-weight:800;color:var(--green)">1차 상담 이탈률 ↓</div><p style="margin-top:3px">진단이 대화의 명분이 됩니다.</p></div>
+      <div class="card" style="padding:13px 16px"><div style="font-size:13px;font-weight:800;color:var(--green)">재방문 승낙률 ↑</div><p style="margin-top:3px">&ldquo;부족액 같이 보시죠&rdquo;는 거절하기 어렵습니다.</p></div>
+      <div class="card" style="padding:13px 16px"><div style="font-size:13px;font-weight:800;color:var(--orange)">불완전판매 리스크 ↓</div><p style="margin-top:3px">고객이 먼저 이해하고 결정합니다.</p></div>
+    </div>
+  </div>
+  <div class="takeaway green">진단은 상품을 파는 도구가 아니라, <b>상품 이야기를 꺼낼 자격을 얻는 도구</b>입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 04 · GA 설계사 실전 강의</div><div class="pageno">19</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 04</div>
+        <div class="hero" style="font-size:50px">The Partnership</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">라이프 2.0과 무엇을 함께 하는가</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">04</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 04 · 회사 소개</div><div class="pageno">20</div></div>
+  <h2 class="title sm">(주)라이프 2.0은 <span class="green-t">무엇을 하는 회사인가</span></h2>
+  <div class="lead">2025년 설립 · 경기도 고양시 · 시니어 생애설계와 그린테크를 함께 다루는 소셜벤처</div>
+  <div class="content" style="margin-top:8px">
+    <div class="grid g3">
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:12px;font-weight:800;font-size:15px">2막 1장</div><div style="padding:14px 16px;text-align:center"><div style="font-size:14px;font-weight:800;color:var(--green);margin-bottom:6px">시니어 생애설계 플랫폼</div><p style="line-height:1.55">은퇴 정밀진단·생애설계 교육·전문가 과정. 재무를 넘어 건강·일·관계·주거·웰다잉까지 6개 영역.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:12px;font-weight:800;font-size:15px">시니어 스마트팜</div><div style="padding:14px 16px;text-align:center"><div style="font-size:14px;font-weight:800;color:var(--green);margin-bottom:6px">은퇴자 소득형 자산</div><p style="line-height:1.55">이끼 재배 스마트팜을 분양하고 원물을 전량 매입합니다. 시니어를 소비자가 아니라 생산자로 세우는 모델.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:12px;font-weight:800;font-size:15px">Bio-MOSS</div><div style="padding:14px 16px;text-align:center"><div style="font-size:14px;font-weight:800;color:var(--green);margin-bottom:6px">공공조달 이끼매트</div><p style="line-height:1.55">4중 적층 이끼매트로 법면녹화 시장에 진입. 특허 등록 및 K-Taxonomy 적합 인증을 확보했습니다.</p></div></div>
+    </div>
+    <div class="grid g4" style="margin-top:14px">
+      <div class="card" style="flex-direction:row;justify-content:space-between;align-items:center;padding:13px 18px"><div style="font-size:12.5px;color:var(--muted)">원천 특허</div><div style="font-size:17px;font-weight:800;color:var(--green)">5+</div></div><div class="card" style="flex-direction:row;justify-content:space-between;align-items:center;padding:13px 18px"><div style="font-size:12.5px;color:var(--muted)">공공조달 진입</div><div style="font-size:17px;font-weight:800;color:var(--green)">확보</div></div><div class="card" style="flex-direction:row;justify-content:space-between;align-items:center;padding:13px 18px"><div style="font-size:12.5px;color:var(--muted)">확보 부지</div><div style="font-size:17px;font-weight:800;color:var(--green)">1,400평</div></div><div class="card" style="flex-direction:row;justify-content:space-between;align-items:center;padding:13px 18px"><div style="font-size:12.5px;color:var(--muted)">협력 채널</div><div style="font-size:17px;font-weight:800;color:var(--green)">공공·지자체</div></div>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 04 · 제휴 안내</div><div class="pageno">21</div></div>
+  <h2 class="title">설계사분들께 <span class="green-t">제공하는 것</span></h2>
+  <div class="content">
+    <div class="grid g2" style="gap:14px">
+      <div class="card"><h3>1. 진단 도구 사용권</h3><p style="margin-top:8px">2막 1장 정밀진단 Ver.21을 상담 현장에서 사용할 수 있도록 제공합니다.</p></div>
+      <div class="card"><h3>2. 상담 자료 패키지</h3><p style="margin-top:8px">오늘 보신 4층 연금 진단표, D-5년 액션플랜, 95세 리스크 자료를 편집 가능한 형태로 제공합니다.</p></div>
+      <div class="card"><h3>3. 교육 프로그램 연계</h3><p style="margin-top:8px">은퇴준비지수 진단 워크숍(2일 16시간)과 생애설계 전문가 과정에 우선 참여 기회를 드립니다.</p></div>
+      <div class="card"><h3>4. B2G 강의 채널 공유</h3><p style="margin-top:8px">기업·공공기관 퇴직예정자 교육 현장에서 발생하는 상담 수요를 연계하는 구조를 검토 중입니다.</p></div>
+    </div>
+  </div>
+  <div class="takeaway green">우리가 파는 것은 상품이 아니라, <b>고객이 스스로 문제를 발견하는 7분</b>입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="pad">
+  <div class="top"><div class="eyebrow">Next Step</div><div class="pageno">22</div></div>
+  <div class="content" style="justify-content:center">
+    <div class="hero" style="font-size:44px">오늘부터 바꿀 수 있는 <span class="g">한 가지</span></div>
+    <div style="font-size:18px;font-weight:800;color:#fff;margin:14px 0 26px">좋은 상품이 있습니다. &rarr; &ldquo;7분이면 되는데, 한번 해보시겠습니까?&rdquo;</div>
+    <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px"><div style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0">1</div><div style="width:90px;font-size:14px;font-weight:800;color:var(--green-l);flex-shrink:0">이번 주</div><div style="flex:1;font-size:13.5px;color:#d5e2db;line-height:1.5">고객 3명에게 진단을 권해 봅니다. 결과 해석까지만 하고 상품은 꺼내지 않습니다.</div></div>
+    <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px"><div style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0">2</div><div style="width:90px;font-size:14px;font-weight:800;color:var(--green-l);flex-shrink:0">2주 내</div><div style="flex:1;font-size:13.5px;color:#d5e2db;line-height:1.5">진단을 받은 고객과 2차 미팅을 잡고 4층 연금 진단표를 함께 작성합니다.</div></div>
+    <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px"><div style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0">3</div><div style="width:90px;font-size:14px;font-weight:800;color:var(--green-l);flex-shrink:0">한 달 내</div><div style="flex:1;font-size:13.5px;color:#d5e2db;line-height:1.5">가장 반응이 좋았던 케이스와 막혔던 케이스를 라이프 2.0과 공유합니다.</div></div>
+  </div>
+  <div style="position:absolute;left:56px;bottom:26px;font-size:11.5px;color:#6f8a7c;line-height:1.7">주식회사 라이프 2.0 · 2막 1장 (2a1s)<br>은퇴 정밀진단 · 생애설계 교육 · 전문가 과정 · daniel@lpp20.com</div>
+</div></section></div>
+</div>
+<div class="counter" id="counter">01 / 22</div>
+<script>
+(function(){
+function fit(){var s=Math.min((window.innerWidth-20)/1000,(window.innerHeight-40)/562.5);s=Math.min(s,1.35);document.documentElement.style.setProperty("--scale",s);}
+window.addEventListener("resize",fit);fit();
+var slides=[].slice.call(document.querySelectorAll(".wrap"));var counter=document.getElementById("counter");var total=slides.length;
+function cur(){var mid=window.innerHeight/2,idx=0,best=1e9;slides.forEach(function(w,i){var r=w.getBoundingClientRect();var c=r.top+r.height/2;var d=Math.abs(c-mid);if(d<best){best=d;idx=i;}});return idx;}
+function update(){counter.textContent=String(cur()+1).padStart(2,"0")+" / "+String(total).padStart(2,"0");}
+window.addEventListener("scroll",update);update();
+document.addEventListener("keydown",function(e){var i=cur();if(e.key==="ArrowRight"||e.key==="ArrowDown"||e.key===" "){e.preventDefault();if(slides[i+1])slides[i+1].scrollIntoView({behavior:"smooth",block:"center"});}if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();if(slides[i-1])slides[i-1].scrollIntoView({behavior:"smooth",block:"center"});}});
+})();
+</script>
+</body></html>

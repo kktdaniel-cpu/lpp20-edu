@@ -1,0 +1,525 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LIFE 2.0 · 한국도로공사 임직원 생애설계 교육</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"><style>
+:root{--ink:#163529;--ink2:#1f4a38;--cream:#efece3;--paper:#ffffff;--paper2:#f7f5ef;--orange:#d47b2c;--orange-soft:#f4e3d1;--green:#3f7a58;--green-l:#82b499;--red:#b23a3a;--tdark:#183a2c;--muted:#6f7d73;--line:#dcd7cc;--scale:1;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:#0d1a14;font-family:'Pretendard',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+.deck{display:flex;flex-direction:column;align-items:center;gap:26px;padding:34px 0 60px;}
+.wrap{width:calc(1000px*var(--scale));height:calc(562.5px*var(--scale));flex-shrink:0;}
+.slide{width:1000px;height:562.5px;position:relative;overflow:hidden;transform:scale(var(--scale));transform-origin:top left;border-radius:8px;box-shadow:0 18px 50px rgba(0,0,0,.45);}
+.slide.light{background:var(--cream);}.slide.dark{background:var(--ink);}
+.slide.paper{background:#f3f2ee;}
+.slide .glow{position:absolute;top:-160px;right:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(184,150,70,.28),rgba(184,150,70,0) 62%);pointer-events:none;}
+.pad{position:absolute;inset:0;padding:40px 56px 62px;display:flex;flex-direction:column;}
+.pad.nb{padding-bottom:40px;}
+.top{display:flex;justify-content:space-between;align-items:flex-start;}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:var(--green);text-transform:uppercase;}
+.slide.dark .eyebrow{color:var(--green-l);}
+.pageno{font-size:12.5px;font-weight:700;letter-spacing:.1em;color:#b7b0a2;}.slide.dark .pageno{color:#6f8a7c;}
+.title{font-size:30px;line-height:1.28;font-weight:800;color:var(--tdark);letter-spacing:-.01em;margin-top:16px;}.slide.dark .title{color:#f4f1ea;}
+.title.sm{font-size:26px;}
+.lead{font-size:15px;line-height:1.55;font-weight:500;color:var(--muted);margin-top:11px;max-width:860px;}.slide.dark .lead{color:#bcccc2;}
+.content{flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:14px;}
+.orange-t{color:var(--orange);}.green-t{color:var(--green);}
+.takeaway{position:absolute;left:0;right:0;bottom:0;min-height:52px;display:flex;align-items:center;padding:10px 56px;font-size:14px;font-weight:700;color:#eef3ef;background:var(--ink);letter-spacing:-.005em;line-height:1.4;}
+.takeaway.orange{background:var(--orange);color:#fff;}.takeaway b{color:#ffd9a8;font-weight:800;}.takeaway.orange b{color:#fff8ef;}
+.takeaway.green{background:var(--green);color:#fff;}.takeaway.green b{color:#eafff2;}
+.grid{display:grid;gap:16px;}.g2{grid-template-columns:1fr 1fr;}.g3{grid-template-columns:repeat(3,1fr);}.g4{grid-template-columns:repeat(4,1fr);}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;}
+.card .num{font-size:14px;font-weight:800;color:var(--orange);margin-bottom:7px;}
+.card h3{font-size:17px;font-weight:800;color:var(--tdark);line-height:1.3;margin-bottom:6px;}
+.card p{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.55;}
+.card.dark{background:var(--ink);border-color:var(--ink);}.card.dark h3{color:#fff;}.card.dark p{color:#c2d1c8;}.card.dark .num{color:var(--green-l);}
+.card.accent{background:var(--orange);border-color:var(--orange);}.card.accent h3,.card.accent .num{color:#fff;}.card.accent p{color:#fdeede;}
+.card.soft{background:var(--orange-soft);border-color:#e7cfb4;}
+.card.gsoft{background:#e6f0ea;border-color:#c8ddd0;}
+.klabel{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}.slide.dark .klabel{color:#8fa89c;}
+.pill{display:inline-block;padding:5px 14px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.02em;background:var(--ink);color:#e7d4ac;}
+.pill.g{background:var(--green);color:#fff;}.pill.o{background:var(--orange);color:#fff;}.pill.teal{background:var(--green-l);color:#0e2b1e;}
+.hero{font-size:40px;font-weight:800;line-height:1.3;color:#f4f1ea;letter-spacing:-.01em;}.hero .o{color:var(--orange);}.hero .g{color:var(--green-l);}
+.chip{padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--paper);border:1px solid var(--line);color:var(--tdark);}
+.chip.acc{background:var(--orange);color:#fff;border-color:var(--orange);}
+.badge{background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--tdark);}
+.badge b{color:var(--green);font-weight:800;}
+table.t{width:100%;border-collapse:collapse;font-size:13px;background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+table.t th{background:var(--ink);color:#fff;font-weight:700;padding:11px 12px;text-align:center;font-size:12.5px;}
+table.t td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--line);color:var(--tdark);}
+table.t tr:last-child td{border-bottom:none;}
+table.t tr.hl td{background:var(--orange-soft);font-weight:700;}
+table.t tr.sum td{background:var(--green);color:#fff;font-weight:800;}
+table.t td.lbl{background:var(--paper2);font-weight:800;}
+.videobox{background:#0e211a;border:1.5px solid #2e5544;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8fa89c;position:relative;text-decoration:none;cursor:pointer;}
+.videobox:hover{border-color:var(--orange);}
+.videobox .play{width:60px;height:60px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.videobox .play::after{content:'';border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px;}
+.vchip{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:700;background:#0e211a;border:1px solid #2e5544;color:#cfe6d9;text-decoration:none;}
+.vchip:hover{border-color:var(--orange);color:#fff;}
+.vchip .d{width:22px;height:22px;border-radius:50%;background:var(--orange);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.vchip .d::after{content:'';border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px;}
+.script{background:var(--paper2);border-left:3px solid var(--orange);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--tdark);line-height:1.6;}.script b{color:var(--orange);}
+.tl{display:flex;flex-direction:column;gap:9px;}
+.tl .row{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 16px;}
+.tl .tm{font-size:13px;font-weight:800;color:var(--muted);width:52px;flex-shrink:0;}
+.tl .tag{flex-shrink:0;}
+.tl .tx{font-size:14px;font-weight:800;color:var(--tdark);}
+.tl .sub{font-size:12px;color:var(--muted);margin-left:auto;text-align:right;max-width:420px;}
+.counter{position:fixed;right:16px;bottom:14px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;z-index:50;letter-spacing:.05em;}
+@media print{@page{size:1000px 562.5px;margin:0;}html,body{background:#fff;}.deck{gap:0;padding:0;}.wrap{width:1000px;height:562.5px;}.slide{transform:none;border-radius:0;box-shadow:none;break-after:page;page-break-after:always;}.counter{display:none;}}
+</style></head><body>
+<div class="deck" id="deck">
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+  <div class="top"><div class="eyebrow">한국도로공사 임직원 생애설계 교육 · 2026</div>
+    <div style="text-align:right"><div style="font-size:15px;font-weight:800;color:#f4f1ea;letter-spacing:.06em">LIFE 2.0</div><div style="font-size:11px;color:#8fa89c;margin-top:2px">생애설계 교육센터</div></div></div>
+  <div class="content" style="justify-content:center">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><div style="width:34px;height:2px;background:var(--orange)"></div>
+      <div style="font-size:14px;font-weight:700;color:#bcccc2">정년 이후 30년, 무엇으로 사는가</div></div>
+    <div class="hero" style="font-size:50px;line-height:1.22">답은 &lsquo;자산&rsquo;이 아니라<br><span class="g">&lsquo;연금&rsquo;</span>입니다</div>
+    <div style="margin-top:22px;display:flex;gap:10px"><a class="vchip" href="https://www.youtube.com/watch?v=YP3coURWJuw" target="_blank" rel="noopener"><span class="d"></span>여는 영상 · &lsquo;좀 더 일찍 알았더라면&rsquo;</a></div>
+  </div>
+  <div style="position:absolute;left:56px;bottom:26px;font-size:11.5px;color:#6f8a7c;line-height:1.7">주식회사 라이프 2.0 · 생애설계 교육센터<br>「지식한상」 송영욱 강사 강의(1부) 도표 재구성 · From Retire to Star</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Education Overview</div><div class="pageno">02</div></div>
+  <h2 class="title">이 시간에 확인할 <span class="orange-t">네 가지</span></h2>
+  <div class="lead">퇴직을 앞둔 분과 아직 시간이 남은 분 모두, 각자의 숫자를 손에 들고 나가는 것이 목표입니다.</div>
+  <div class="content" style="justify-content:flex-start;margin-top:18px">
+    <div class="grid g4">
+      <div class="card"><div class="num">01</div><h3>은퇴 현실 진단</h3><p>내 또래는 지금 어떤 상태인가</p></div>
+      <div class="card"><div class="num">02</div><h3>국민연금의 실제 숫자</h3><p>&lsquo;평균 68만원&rsquo;의 진짜 의미</p></div>
+      <div class="card"><div class="num">03</div><h3>자산에서 연금으로</h3><p>10억이 아니라 월 500만원</p></div>
+      <div class="card"><div class="num">04</div><h3>퇴직 전 실행</h3><p>D-5년, 무엇부터 하는가</p></div>
+    </div>
+    <div class="card gsoft" style="margin-top:16px">
+      <div class="klabel" style="color:var(--green)">교육 목표</div>
+      <p style="color:var(--tdark);font-size:12.5px;line-height:1.7">① 정년과 연금 개시 사이의 공백을 스스로 계산한다 &nbsp; ② 국민연금 실제 예상액을 조회한다<br>③ 4층 연금 구조로 부족액을 메우는 설계도를 작성한다 &nbsp; ④ 되돌릴 수 없는 결정 다섯 가지를 미리 안다</p>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 01 · 「2막1장」 생애설계</div><div class="pageno">03</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 01</div>
+        <div class="hero" style="font-size:52px">Retirement<br>Reality</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">은퇴 현실 진단 &mdash; 내 또래는 지금 어떤 상태인가</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">01</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 01 · 소득 크레바스</div><div class="pageno">04</div></div>
+  <h2 class="title">정년 <span class="orange-t">60세</span>, 연금 <span class="orange-t">63~65세</span>. 그 사이가 비어 있습니다</h2>
+  <div class="content">
+    <div style="display:flex;border-radius:10px;overflow:hidden;margin-bottom:6px">
+      <div style="flex:2;background:var(--green);color:#fff;text-align:center;padding:12px;font-weight:700;font-size:13px">재직 기간</div>
+      <div style="flex:1;background:var(--orange);color:#fff;text-align:center;padding:12px;font-weight:700;font-size:13px">소득 공백 (최대 5년)</div>
+      <div style="flex:1.2;background:var(--ink);color:#fff;text-align:center;padding:12px;font-weight:700;font-size:13px">연금 수령 (종신)</div>
+    </div>
+    <div style="display:flex;font-size:11.5px;color:var(--muted);margin-bottom:16px"><div style="flex:2">55세</div><div style="flex:1;text-align:center">60세 정년</div><div style="flex:1.2;text-align:center">64세 수급개시</div><div style="width:40px;text-align:right">종신</div></div>
+    <div class="grid g3">
+      <div class="card"><div class="pill o" style="align-self:flex-start;margin-bottom:10px">무급 구간</div><div style="font-size:30px;font-weight:800;color:var(--orange)">최대 5년</div><p style="margin-top:8px">1965~68년생은 64세, 1969년생 이후는 65세부터 국민연금이 개시됩니다.</p></div>
+      <div class="card"><div class="pill" style="align-self:flex-start;margin-bottom:10px">필요 자금</div><div style="font-size:30px;font-weight:800;color:var(--tdark)">약 1.8억원</div><p style="margin-top:8px">월 생활비 300만원 가정 시 5년간 필요한 총액입니다.</p></div>
+      <div class="card"><div class="pill g" style="align-self:flex-start;margin-bottom:10px">구조적 문제</div><div style="font-size:30px;font-weight:800;color:var(--green)">2층이 먼저 소진</div><p style="margin-top:8px">이 공백을 퇴직금으로 메우면 노후 연금의 한 층이 사라집니다.</p></div>
+    </div>
+    <div style="margin-top:14px"><a class="vchip" href="https://www.youtube.com/watch?v=sq8Spa-9boU" target="_blank" rel="noopener"><span class="d"></span>관련 영상 · 소득이 끊기는 전환 장면 (KBS 특집)</a></div>
+  </div>
+  <div class="takeaway green">소득 크레바스는 &lsquo;얼마 모았나&rsquo;의 문제가 아니라 <b>&lsquo;언제부터 나오나&rsquo;</b>의 문제입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 01 · 수급개시연령</div><div class="pageno">05</div></div>
+  <h2 class="title sm">&lsquo;67년생부터 주목하세요&rsquo; &mdash; <span class="green-t">내 연금은 몇 살부터 나오나</span></h2>
+  <div class="content" style="margin-top:10px">
+    <div class="grid" style="grid-template-columns:1.35fr 1fr;gap:18px;align-items:start">
+      <table class="t">
+        <tr><th>출생연도</th><th>수급개시연령</th><th>정년(60세) 이후 공백</th></tr>
+        <tr><td>1952년 이전</td><td>60세</td><td>없음</td></tr>
+        <tr><td>1953~1956년생</td><td>61세</td><td>1년</td></tr>
+        <tr><td>1957~1960년생</td><td>62세</td><td>2년</td></tr>
+        <tr><td>1961~1964년생</td><td>63세</td><td>3년</td></tr>
+        <tr class="hl"><td>1965~1968년생</td><td>64세</td><td>4년</td></tr>
+        <tr class="hl"><td>1969년생 이후</td><td>65세</td><td>5년</td></tr>
+      </table>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card dark"><div class="klabel" style="color:var(--green-l)">1967년생 기준</div><div style="font-size:30px;font-weight:800;color:#fff">64세 · 2031년부터</div><p style="margin-top:6px">정년 퇴직 후 4년을 스스로 버텨야 하는 첫 세대 구간입니다.</p></div>
+        <div class="card"><div class="klabel" style="color:var(--green)">함께 기억할 것</div><p style="color:var(--tdark);line-height:1.6"><b style="color:var(--tdark)">조기노령연금</b>은 최대 5년 앞당길 수 있으나 1년당 6%씩 <b style="color:var(--red)">평생 감액</b>. <b style="color:var(--tdark)">연기연금</b>은 최대 5년 늦추면 1년당 7.2%씩 <b style="color:var(--green)">평생 가산</b>됩니다.</p></div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:12px">출처: 「국민연금법」 부칙에 따른 출생연도별 노령연금 지급개시연령 · 국민연금공단 (2026년 기준)</div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 01 · 강사 도표 ①</div><div class="pageno">06</div></div>
+  <h2 class="title sm">은퇴한 내 친구들 통장에는 <span class="green-t">얼마나 있을까</span></h2>
+  <div class="content" style="margin-top:8px">
+    <div class="grid" style="grid-template-columns:1.5fr 1fr;gap:18px;align-items:start">
+      <div>
+        <table class="t">
+          <tr><th>구분</th><th>총자산</th><th>실물자산(비중)</th><th>금융자산(비중)</th><th>부채</th></tr>
+          <tr><td class="lbl">50대</td><td>6.6억원</td><td>5.0억(76%)</td><td style="color:var(--green);font-weight:700">1.6억(24%)</td><td>1.1억</td></tr>
+          <tr><td class="lbl">60대</td><td>6.0억원</td><td>4.9억(82%)</td><td style="color:var(--orange);font-weight:700">1.1억(18%)</td><td>0.7억</td></tr>
+        </table>
+        <div class="card" style="margin-top:14px">
+          <div class="klabel">50대 → 60대, 무엇이 바뀌었나</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--tdark)">
+            <div style="display:flex"><b style="width:110px">총자산</b><span style="flex:1">6.6억 → 6.0억</span><span style="color:var(--muted)">0.6억 감소</span></div>
+            <div style="display:flex"><b style="width:110px">금융자산 비중</b><span style="flex:1">24% → 18%</span><span style="color:var(--orange);font-weight:700">6%p 감소</span></div>
+            <div style="display:flex"><b style="width:110px">부채</b><span style="flex:1">1.1억 → 0.7억</span><span style="color:var(--green);font-weight:700">0.4억 상환</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card dark">
+        <div class="klabel" style="color:var(--green-l)">강사가 강조한 한 줄</div>
+        <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.45;margin:6px 0 12px">&ldquo;금융자산이 24%에서 18%로 줄었다는 거죠&rdquo;</div>
+        <p style="color:#c2d1c8;line-height:1.6">나이가 들면서 자산 총액이 아니라 &lsquo;쓸 수 있는 형태의 자산&rsquo;이 먼저 줄어듭니다.</p>
+        <div style="margin-top:14px"><a class="vchip" href="https://www.youtube.com/watch?v=rRy8p9sylLk" target="_blank" rel="noopener"><span class="d"></span>영상 · 70대 통장 잔고 공개 (EBS)</a></div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:10px">출처: 송영욱 강사 강의 「은퇴자의 (순)금융자산 현황」 · 실물자산·비중은 총자산과 금융자산으로부터 역산한 값입니다.</div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 01 · 해석</div><div class="pageno">07</div></div>
+  <h2 class="title">총자산은 6억, 그런데 <span class="orange-t">쓸 수 있는 돈은 1억</span></h2>
+  <div class="content">
+    <div class="grid g3">
+      <div class="card"><div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px">①</div><h3>금융자산은 계속 줄어든다</h3><p style="margin-top:4px">24% → 18%. 은퇴 후에는 생활비를 통장에서 빼서 쓰므로, 별도 유입이 없으면 구조적으로 감소합니다.</p></div>
+      <div class="card"><div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--orange);color:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px">②</div><h3>자산의 82%가 집에 묶여 있다</h3><p style="margin-top:4px">실물자산은 팔거나 담보로 잡지 않으면 생활비가 되지 않습니다. 장부상 부자, 현금흐름상 빈곤 상태입니다.</p></div>
+      <div class="card"><div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px">③</div><h3>부채는 여전히 남아 있다</h3><p style="margin-top:4px">60대에도 평균 0.7억. 금융자산 1.1억에서 이를 감안하면 실제 여유 자금은 더 작아집니다.</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card soft" style="flex-direction:row;align-items:center;gap:18px"><div style="font-size:38px;font-weight:800;color:var(--orange)">1.1억원</div><p style="color:var(--tdark)">60대 평균 금융자산 &mdash; 정년 후 5년의 공백을 메우기에는 충분하지 않은 규모입니다.</p></div>
+      <div class="card gsoft"><div style="font-size:16px;font-weight:800;color:var(--tdark)">&ldquo;집 있고 6억 있는데 왜 쪼들리지?&rdquo;</div><p style="color:var(--tdark);margin-top:6px">자산은 있으나 현금흐름이 없는 상태 &mdash; 은퇴 가계의 가장 흔한 형태입니다.</p></div>
+    </div>
+  </div>
+  <div class="takeaway">진단의 기준은 잔고가 아니라, <b>매달 들어오는 돈과 나가는 돈의 차이</b>입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 01 · 자가진단</div><div class="pageno">08</div></div>
+  <h2 class="title">잠시 멈추고, <span class="green-t">세 가지만 계산해 보십시오</span></h2>
+  <div class="lead">옆 사람과 비교하지 않아도 됩니다. 자기 숫자를 아는 것만으로 오늘 교육의 절반이 끝납니다.</div>
+  <div class="content"><div style="display:flex;flex-direction:column;gap:12px">
+    <div class="card" style="flex-direction:row;align-items:center;gap:18px;padding:16px 20px"><div style="width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">Q1</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">내 총자산 중 부동산이 차지하는 비중은?</div><div style="font-size:11.5px;color:var(--muted);margin-top:3px">참고 기준 · 60대 평균 82%</div></div><div style="width:200px;height:40px;background:var(--paper2);border:1px dashed var(--line);border-radius:8px;flex-shrink:0"></div><div style="font-size:13px;font-weight:700;color:var(--muted);width:34px">%</div></div>
+    <div class="card" style="flex-direction:row;align-items:center;gap:18px;padding:16px 20px"><div style="width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">Q2</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">지금 당장 현금화할 수 있는 금융자산은?</div><div style="font-size:11.5px;color:var(--muted);margin-top:3px">참고 기준 · 60대 평균 1.1억원</div></div><div style="width:200px;height:40px;background:var(--paper2);border:1px dashed var(--line);border-radius:8px;flex-shrink:0"></div><div style="font-size:13px;font-weight:700;color:var(--muted);width:34px">만원</div></div>
+    <div class="card" style="flex-direction:row;align-items:center;gap:18px;padding:16px 20px"><div style="width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">Q3</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:var(--tdark)">퇴직일부터 국민연금 개시까지 몇 년인가?</div><div style="font-size:11.5px;color:var(--muted);margin-top:3px">참고 기준 · 1965~68년생 4년 / 1969년생~ 5년</div></div><div style="width:200px;height:40px;background:var(--paper2);border:1px dashed var(--line);border-radius:8px;flex-shrink:0"></div><div style="font-size:13px;font-weight:700;color:var(--muted);width:34px">년</div></div>
+  </div></div>
+  <div class="takeaway">이 세 숫자가 나오면, 남은 시간은 <b>그 숫자를 메우는 방법</b>에 대한 이야기입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 02 · 「2막1장」 생애설계</div><div class="pageno">09</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 02</div>
+        <div class="hero" style="font-size:52px">The Real<br>Number</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">국민연금, 실제로 얼마 받는가</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">02</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 02 · 강사 도표 ②</div><div class="pageno">10</div></div>
+  <h2 class="title sm">대한민국 평균 국민연금 수령액은 <span class="green-t">이 정도입니다</span></h2>
+  <div class="content" style="margin-top:6px">
+    <div class="grid" style="grid-template-columns:1.3fr 1fr;gap:20px;align-items:stretch">
+      <div class="card" style="padding:20px">
+        <div class="klabel">국민연금 월수령액 (2025년 기준) · 단위 만원</div>
+        <div style="display:flex;gap:10px;height:210px;align-items:flex-end;margin-top:10px">
+          <div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:var(--green);margin-bottom:6px">68</div><div style="width:56px;height:72px;background:var(--green);border-radius:6px 6px 0 0"></div><div style="font-size:11.5px;color:var(--muted);margin-top:8px;text-align:center">평균 수령액</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:#9aa39c;margin-bottom:6px">44</div><div style="width:56px;height:46px;background:#9aa39c;border-radius:6px 6px 0 0"></div><div style="font-size:11.5px;color:var(--muted);margin-top:8px;text-align:center">20년 미만</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:var(--green-l);margin-bottom:6px">112</div><div style="width:56px;height:118px;background:var(--green-l);border-radius:6px 6px 0 0"></div><div style="font-size:11.5px;color:var(--muted);margin-top:8px;text-align:center">20년 이상</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end"><div style="font-size:16px;font-weight:800;color:var(--orange);margin-bottom:6px">318</div><div style="width:56px;height:200px;background:var(--orange);border-radius:6px 6px 0 0"></div><div style="font-size:11.5px;color:var(--muted);margin-top:8px;text-align:center">최고 수령액</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:800;color:var(--tdark)">44만원</div><div style="font-size:11px;font-weight:700;color:var(--muted)">20년 미만 가입</div></div><p style="margin-top:5px">가입기간이 짧으면 제도는 같아도 연금은 절반 이하가 됩니다.</p></div>
+        <div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:800;color:var(--green)">112만원</div><div style="font-size:11px;font-weight:700;color:var(--muted)">20년 이상 가입</div></div><p style="margin-top:5px">도로공사처럼 장기 재직한 직원이 기준으로 삼아야 할 구간입니다.</p></div>
+        <div class="card"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:800;color:var(--orange)">318만원</div><div style="font-size:11px;font-weight:700;color:var(--muted)">최고 수령액</div></div><p style="margin-top:5px">가입기간·소득·연기연금이 모두 겹친 예외적 사례입니다.</p></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><div style="font-size:11px;color:var(--muted)">출처: 송영욱 강사 강의 「국민연금 월수령액(2025년 기준)」</div><a class="vchip" href="https://www.youtube.com/watch?v=76GaqpIWtaU" target="_blank" rel="noopener"><span class="d"></span>영상 · 내 연금은 상위 몇 %?</a></div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 02 · 해석</div><div class="pageno">11</div></div>
+  <h2 class="title">68만원은 &lsquo;평균&rsquo;입니다. <span class="orange-t">내 숫자가 아닙니다</span></h2>
+  <div class="content">
+    <div class="grid g2">
+      <div class="card"><div class="pill" style="align-self:flex-start;background:#9aa39c;color:#fff;margin-bottom:10px">평균을 끌어내리는 쪽</div><h3>가입기간 10~19년 수급자</h3><p style="margin-top:6px">경력단절·자영업 전환·납부예외 기간이 있었던 수급자, 임의가입자가 평균에 함께 들어갑니다. 이 구간의 평균이 44만원입니다.</p></div>
+      <div class="card dark"><div class="pill g" style="align-self:flex-start;margin-bottom:10px">장기 재직 공기업 직원</div><h3 style="color:#fff">30년 납부 · 상한 근처 소득</h3><p style="color:#c2d1c8;margin-top:6px">입사 후 정년까지 끊김 없이 납부한 직원은 112만원 이상 구간에 위치합니다. 평균 68만원을 기준으로 설계하면 과소 추정이 됩니다.</p></div>
+    </div>
+    <div class="card soft" style="margin-top:16px"><div class="klabel" style="color:var(--orange)">다만, 무한히 늘지는 않습니다</div><p style="color:var(--tdark);line-height:1.65">국민연금은 기준소득월액에 상한이 있습니다. 2026년 7월~2027년 6월 적용 상한은 월 659만원, 하한은 41만원. 소득이 상한을 넘어도 그 이상은 반영되지 않으므로, 고소득 직원일수록 2·3층(퇴직연금·개인연금)의 비중이 더 중요해집니다.</p></div>
+  </div>
+  <div class="takeaway">평균을 쓰지 마십시오. <b>국민연금공단에서 조회한 &lsquo;내 예상액&rsquo;</b>으로 시작해야 합니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 02 · 2026년 갱신</div><div class="pageno">12</div></div>
+  <h2 class="title">2025년 68만원 &rarr; <span class="green-t">2026년 69.8만원</span></h2>
+  <div class="lead">강의에서 언급된 &ldquo;2026년 것은 69만원 조금 넘습니다&rdquo;를 공식 수치로 확인한 결과입니다.</div>
+  <div class="content" style="justify-content:flex-start;margin-top:16px">
+    <div class="grid g4">
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--tdark)">683,666원</div><p style="margin-top:8px">2025년 11월 기준 평균 월수령액</p></div>
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--orange)">+2.1%</div><p style="margin-top:8px">전년도 소비자물가 상승률 반영</p></div>
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--green)">약 698,000원</div><p style="margin-top:8px">2026년 기준 평균 월수령액</p></div>
+      <div class="card"><div style="font-size:24px;font-weight:800;color:var(--tdark)">3,193,511원</div><p style="margin-top:8px">2026년 적용 A값 (전체 가입자 평균소득)</p></div>
+    </div>
+    <div class="card" style="margin-top:16px"><div style="font-size:14px;font-weight:800;color:var(--tdark)">이 수치가 중요한 진짜 이유 &mdash; 물가연동</div><p style="color:var(--tdark);line-height:1.7;margin-top:6px">국민연금은 매년 전년도 소비자물가상승률만큼 자동으로 인상됩니다. 즉 <b style="color:var(--green)">물가에 지지 않는 층</b>입니다. 반면 개인연금·퇴직연금은 대부분 정액 지급이므로, 20년 뒤 250만원의 실질 구매력은 지금의 절반 수준일 수 있습니다. 따라서 <b style="color:var(--tdark)">국민연금과 주택연금(종신형)</b>이 노후 소득의 &lsquo;바닥&rsquo;을 만들고, 나머지 층이 그 위를 채우는 구조로 보아야 합니다.</p></div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 02 · 핵심 변수</div><div class="pageno">13</div></div>
+  <h2 class="title sm">국민연금을 늘리는 가장 확실한 변수는 <span class="green-t">&lsquo;개월 수&rsquo;</span>입니다</h2>
+  <div class="content" style="margin-top:8px">
+    <div class="grid g2" style="align-items:stretch">
+      <div class="card dark"><div class="klabel" style="color:var(--green-l)">기본연금액 산정식</div>
+        <div style="font-size:24px;font-weight:800;color:#fff;margin:8px 0 12px">1.2 &times; (A + B) &times; (1 + 0.05n/12)</div>
+        <p style="color:#c2d1c8;line-height:1.7">A = 전체 가입자 평균소득 · B = 본인 평균소득<br>n = 20년을 초과한 가입 월수<br><b style="color:var(--green-l)">→ 20년을 넘긴 뒤에는 1년마다 약 5%씩 가산됩니다.</b></p>
+      </div>
+      <div class="card"><h3>44만원 &rarr; 112만원, 2.5배</h3><p style="margin-top:6px">20년 미만 가입자와 20년 이상 가입자의 평균 차이입니다. 소득 차이가 아니라 납부 개월 수의 차이가 만든 격차입니다.</p>
+        <div class="card gsoft" style="margin-top:12px"><p style="color:var(--tdark);font-weight:700;text-align:center">1개월만 더 납부해도 그 인상분은 평생 지급됩니다.</p></div>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card"><div class="pill g" style="align-self:flex-start;margin-bottom:8px">재직 중</div><h3 style="font-size:15px">끊김 없이 납부</h3><p>휴직·무급 기간에도 납부예외를 그대로 두지 말고 납부 여부를 확인합니다.</p></div>
+      <div class="card"><div class="pill g" style="align-self:flex-start;margin-bottom:8px">퇴직 직후</div><h3 style="font-size:15px">임의계속가입 검토</h3><p>60세 이후에도 65세까지 계속 납부해 가입기간을 늘릴 수 있습니다.</p></div>
+      <div class="card"><div class="pill g" style="align-self:flex-start;margin-bottom:8px">개시 직전</div><h3 style="font-size:15px">연기연금 판단</h3><p>다른 층으로 공백을 메울 수 있다면 최대 5년 연기가 유리할 수 있습니다.</p></div>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 02 · 제도 활용</div><div class="pageno">14</div></div>
+  <h2 class="title">퇴직 전후에 쓸 수 있는 <span class="green-t">다섯 개의 레버</span></h2>
+  <div class="content"><div style="display:flex;flex-direction:column;gap:10px">
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 18px"><div style="width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0">1</div><div style="width:150px;font-size:14.5px;font-weight:800;color:var(--tdark);flex-shrink:0">추후납부(추납)</div><div style="flex:1;font-size:12.5px;color:var(--muted)">과거 납부예외·미납 기간을 나중에 채워 넣는 제도. 최대 119개월까지 신청 가능</div><div class="pill g" style="flex-shrink:0">가입기간 ↑</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 18px"><div style="width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0">2</div><div style="width:150px;font-size:14.5px;font-weight:800;color:var(--tdark);flex-shrink:0">임의계속가입</div><div style="flex:1;font-size:12.5px;color:var(--muted)">60세 이후에도 65세까지 본인 희망으로 계속 납부하여 가입기간을 연장</div><div class="pill g" style="flex-shrink:0">가입기간 ↑</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 18px"><div style="width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0">3</div><div style="width:150px;font-size:14.5px;font-weight:800;color:var(--tdark);flex-shrink:0">연기연금</div><div style="flex:1;font-size:12.5px;color:var(--muted)">수급개시를 최대 5년 늦추는 대신 1년당 7.2%씩 가산 (5년 연기 시 36% 평생 증액)</div><div class="pill g" style="flex-shrink:0">연금액 ↑</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 18px"><div style="width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0">4</div><div style="width:150px;font-size:14.5px;font-weight:800;color:var(--tdark);flex-shrink:0">크레딧 제도</div><div style="flex:1;font-size:12.5px;color:var(--muted)">군복무·출산 등에 대해 보험료 납부 없이 가입기간을 추가로 인정</div><div class="pill g" style="flex-shrink:0">가입기간 ↑</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 18px"><div style="width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0">5</div><div style="width:150px;font-size:14.5px;font-weight:800;color:var(--tdark);flex-shrink:0">반납금 제도</div><div style="flex:1;font-size:12.5px;color:var(--muted)">과거에 받은 반환일시금을 이자와 함께 반납하여 그 기간을 복원</div><div class="pill g" style="flex-shrink:0">가입기간 ↑</div></div>
+  </div></div>
+  <div class="takeaway">다섯 개 모두 <b>&lsquo;가입기간&rsquo; 또는 &lsquo;수령시점&rsquo;</b>을 건드립니다. 소득을 늘리는 방법은 여기에 없습니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 02 · 의사결정</div><div class="pageno">15</div></div>
+  <h2 class="title sm">연기연금과 조기수령, <span class="green-t">어느 쪽이 유리한가</span></h2>
+  <div class="content" style="margin-top:8px">
+    <table class="t" style="font-size:12.5px">
+      <tr><th>구분</th><th style="background:#8a7d6b">조기노령연금</th><th>정상 수령</th><th style="background:var(--green)">연기연금</th></tr>
+      <tr><td class="lbl">시점 조정</td><td style="color:var(--orange)">최대 5년 앞당김</td><td>기준 개시연령</td><td style="color:var(--green);font-weight:700">최대 5년 연기</td></tr>
+      <tr><td class="lbl">연금액 변동</td><td style="color:var(--orange)">1년당 6% 감액 (5년 시 30%↓)</td><td>100%</td><td style="color:var(--green);font-weight:700">1년당 7.2% 가산 (5년 시 36%↑)</td></tr>
+      <tr><td class="lbl">효력</td><td style="color:var(--orange)">평생 감액</td><td>&mdash;</td><td style="color:var(--green);font-weight:700">평생 가산</td></tr>
+      <tr><td class="lbl">유리한 경우</td><td style="color:var(--orange)">공백 기간 재원이 전혀 없을 때</td><td>표준</td><td style="color:var(--green);font-weight:700">퇴직 후 소득이 있고 2·3층으로 공백 메울 때</td></tr>
+    </table>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card soft"><div class="klabel" style="color:var(--orange)">조기수령의 진짜 비용</div><p style="color:var(--tdark)">&lsquo;급한 5년&rsquo;을 위해 &lsquo;남은 30년&rsquo;을 깎는 선택입니다. 5년 조기 신청 시 30% 감액이 사망 시점까지 이어집니다.</p></div>
+      <div class="card gsoft"><div class="klabel" style="color:var(--green)">판단 순서</div><p style="color:var(--tdark)">① 공백 기간 재원을 2·3층으로 메울 수 있는가 → 가능하면 연기 검토<br>② 손익분기 시점은 개인 납부이력에 따라 다릅니다. 반드시 1355에서 본인 수치를 확인하십시오.</p></div>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 03 · 「2막1장」 생애설계</div><div class="pageno">16</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 03</div>
+        <div class="hero" style="font-size:52px">From Asset<br>To Income</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">자산에서 연금으로 &mdash; 관점을 바꾸는 지점</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">03</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 03 · 강사 도표 ③</div><div class="pageno">17</div></div>
+  <h2 class="title">퇴직시점과 연금시점의 불일치, <span class="green-t">무엇을 바꿔야 하나</span></h2>
+  <div class="content">
+    <div class="grid g2" style="align-items:stretch">
+      <div class="card" style="text-align:center;background:#f0efeb"><div class="pill" style="background:#9aa39c;color:#fff;align-self:center;margin-bottom:14px">&lang;자산&rang; 중심의 관리</div>
+        <div style="font-size:17px;font-weight:800;color:var(--tdark)">대부분 부동산 자산</div><div style="font-size:12px;color:var(--muted);margin:4px 0 14px">(현금 부족 문제 발생)</div>
+        <div style="font-size:21px;font-weight:800;color:var(--tdark);line-height:1.4">&ldquo;일 하지 않아도 살 수 있게<br>10억을 만든다&rdquo;</div>
+        <div class="pill" style="background:#8a7d6b;color:#fff;align-self:center;margin-top:14px">잔고를 목표로 삼는 방식</div>
+      </div>
+      <div class="card" style="text-align:center;background:#e6f0ea;border-color:var(--green)"><div class="pill g" style="align-self:center;margin-bottom:14px">&lang;연금&rang; 중심의 관리</div>
+        <div style="font-size:17px;font-weight:800;color:var(--tdark)">대부분 4층 연금</div><div style="font-size:12px;color:var(--muted);margin:4px 0 14px">(국민 / 퇴직 / 개인 / 주택연금)</div>
+        <div style="font-size:21px;font-weight:800;color:var(--green);line-height:1.4">&ldquo;매월 500만원의 연금이<br>나오게 한다&rdquo;</div>
+        <div class="pill g" style="align-self:center;margin-top:14px">현금흐름을 목표로 삼는 방식</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:12px">출처: 송영욱 강사 강의 「퇴직시점과 연금시점의 불일치에 대한 관리」</div>
+  </div>
+  <div class="takeaway green">강사의 결론 &mdash; <b>&ldquo;자산 중심으로 관리하는 게 문제다.&rdquo;</b></div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 03 · 관점 전환</div><div class="pageno">18</div></div>
+  <h2 class="title">10억을 모으는 계획은 <span class="orange-t">왜 대부분 실패하는가</span></h2>
+  <div class="content">
+    <div class="grid g3">
+      <div class="card"><div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--orange);color:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px">①</div><h3>목표 자체가 도달 불가능하다</h3><p style="margin-top:4px">60대 평균 총자산은 6.0억, 그중 금융자산은 1.1억. 10억이라는 목표는 대다수에게 처음부터 미달이 예정된 숫자입니다.</p></div>
+      <div class="card"><div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px">②</div><h3>모아도 인출 문제가 남는다</h3><p style="margin-top:4px">10억을 언제부터 얼마씩 빼서 쓸지, 몇 살까지 살지는 알 수 없습니다. 잔고는 안심을 주지만 계획을 주지는 않습니다.</p></div>
+      <div class="card"><div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--green);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:10px">③</div><h3>연금은 목표가 &lsquo;월 단위&rsquo;다</h3><p style="margin-top:4px">매달 얼마가 들어오는지로 관리하면 생활비와의 차액, 즉 부족액이 즉시 계산됩니다.</p></div>
+    </div>
+    <div style="background:var(--ink);border-radius:14px;padding:22px 28px;margin-top:18px;display:flex;align-items:center;gap:20px">
+      <div style="font-size:13px;color:#bcccc2">질문을 바꿉니다.</div>
+      <div style="font-size:19px;font-weight:800;color:#9aa39c;text-decoration:line-through">&ldquo;얼마를 모을까&rdquo;</div>
+      <div style="font-size:24px;color:var(--green-l)">&rarr;</div>
+      <div style="font-size:22px;font-weight:800;color:#fff">&ldquo;매달 얼마가 들어오게 할까&rdquo;</div>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 03 · 강사 도표 ④</div><div class="pageno">19</div></div>
+  <h2 class="title sm">3층만 쌓아도 월 <span class="green-t">430만원</span> &mdash; 시뮬레이션</h2>
+  <div class="lead">2025년 직장인 평균 월급 350만원 · 직장생활 30년 기준 (예시)</div>
+  <div class="content" style="margin-top:12px">
+    <div class="grid" style="grid-template-columns:1.6fr 1fr;gap:18px;align-items:start">
+      <table class="t" style="font-size:12.5px">
+        <tr><th>구분</th><th>납입기간</th><th>납입기준</th><th>30년 후 매월 예상수령액</th><th>수령기간</th></tr>
+        <tr><td class="lbl">국민연금</td><td>30년</td><td>월급의 9% 적립</td><td>100만원</td><td>죽을때까지</td></tr>
+        <tr><td class="lbl">퇴직연금</td><td>30년</td><td>연봉의 8.3% 적립</td><td>80만원</td><td>30년</td></tr>
+        <tr class="hl"><td class="lbl" style="background:transparent">개인연금</td><td>30년</td><td>매월 75만원 적립</td><td style="color:var(--green);font-weight:800">250만원</td><td>30년</td></tr>
+        <tr class="sum"><td>합계</td><td colspan="2"></td><td>430만원</td><td></td></tr>
+      </table>
+      <div class="card dark"><div class="klabel" style="color:var(--green-l)">핵심 변수</div><div style="font-size:34px;font-weight:800;color:var(--orange)">250만원</div><div style="font-size:13px;color:#fff;font-weight:700;margin-bottom:10px">3층 · 개인연금</div><p style="color:#c2d1c8;line-height:1.6">전체 430만원의 58%가 스스로 쌓는 3층에서 나옵니다. 국민·퇴직연금은 제도가 정해주지만, 개인연금은 각자의 선택입니다.</p></div>
+    </div>
+    <div class="card soft" style="margin-top:12px;padding:12px 18px"><p style="color:var(--tdark);font-size:11.5px;line-height:1.6">※ 시뮬레이션(연 3% 운용 가정) 결과로서 개인별 수령액과는 다를 수 있으니 참고자료로만 활용하시기 바랍니다. · 개인연금은 매년 1~2만원씩 추가 적립(인플레이션 반영)하는 것을 전제로 한 수치입니다.</p></div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 03 · 강사 도표 ⑤</div><div class="pageno">20</div></div>
+  <h2 class="title sm">여기에 집을 얹으면 월 <span class="green-t">550만원</span> &mdash; 4층 연금</h2>
+  <div class="lead">동일 조건(월급 350만원·30년) + 주택가격 5억·65세 수령 기준</div>
+  <div class="content" style="margin-top:12px">
+    <div class="grid" style="grid-template-columns:1.6fr 1fr;gap:18px;align-items:start">
+      <table class="t" style="font-size:12.5px">
+        <tr><th>구분</th><th>납입기준</th><th>30년 후 매월 예상수령액</th><th>수령기간</th></tr>
+        <tr><td class="lbl">국민연금</td><td>월급의 9% 적립</td><td>100만원</td><td>죽을때까지</td></tr>
+        <tr><td class="lbl">퇴직연금</td><td>연봉의 8.3% 적립</td><td>80만원</td><td>30년</td></tr>
+        <tr><td class="lbl">개인연금</td><td>매월 75만원 적립</td><td>250만원</td><td>30년</td></tr>
+        <tr class="hl"><td class="lbl" style="background:transparent">주택연금</td><td>주택가격 5억, 65세 수령</td><td style="color:var(--green);font-weight:800">120만원</td><td>죽을때까지</td></tr>
+        <tr class="sum"><td>합계</td><td></td><td>550만원</td><td></td></tr>
+      </table>
+      <div class="card"><div class="pill g" style="align-self:flex-start;margin-bottom:8px">4층 · 주택연금</div><div style="font-size:32px;font-weight:800;color:var(--green)">+120만원</div><div style="font-size:13px;font-weight:700;color:var(--tdark);margin-bottom:10px">주택담보노후연금</div><p>집을 팔지 않고 그대로 거주하면서 평생 연금을 받는 제도입니다. 앞서 본 &lsquo;집에 묶인 82%&rsquo;를 현금흐름으로 바꾸는 유일한 장치입니다.</p></div>
+    </div>
+    <div class="card soft" style="margin-top:12px;padding:12px 18px"><p style="color:var(--tdark);font-size:11.5px;line-height:1.6">※ 주택연금 수령액은 가입 시점의 연령과 주택가격으로 결정되며, 이후 주택가격 상승은 반영되지 않습니다. 한국주택금융공사에서 본인 기준 예상액을 조회하십시오.</p></div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 03 · 구조 이해</div><div class="pageno">21</div></div>
+  <h2 class="title sm">4층 각각의 <span class="green-t">역할과 리스크는 다릅니다</span></h2>
+  <div class="content" style="margin-top:10px">
+    <div class="grid g4">
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--ink);color:#fff;text-align:center;padding:12px;font-weight:800;font-size:14px">4층 주택연금</div><div style="padding:14px 16px"><div class="klabel">역할</div><div style="font-size:13.5px;font-weight:800;color:var(--tdark);margin-bottom:10px">실물자산 유동화</div><div class="klabel">성격</div><div style="font-size:13px;font-weight:700;color:var(--tdark);margin-bottom:10px">종신 · 정액</div><div class="klabel">주의할 점</div><div style="font-size:12px;color:var(--red);line-height:1.5">가입 시 주택가격에 고정, 중도 해지 시 부담 발생</div></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:12px;font-weight:800;font-size:14px">3층 개인연금</div><div style="padding:14px 16px"><div class="klabel">역할</div><div style="font-size:13.5px;font-weight:800;color:var(--tdark);margin-bottom:10px">부족액 메우기 (최대 변수)</div><div class="klabel">성격</div><div style="font-size:13px;font-weight:700;color:var(--tdark);margin-bottom:10px">확정기간형 다수 (종신형 선택 가능)</div><div class="klabel">주의할 점</div><div style="font-size:12px;color:var(--red);line-height:1.5">중도 해지 시 그동안 받은 세액공제를 추징</div></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green-l);color:#fff;text-align:center;padding:12px;font-weight:800;font-size:14px">2층 퇴직연금</div><div style="padding:14px 16px"><div class="klabel">역할</div><div style="font-size:13.5px;font-weight:800;color:var(--tdark);margin-bottom:10px">정년~수급개시 공백 메우기</div><div class="klabel">성격</div><div style="font-size:13px;font-weight:700;color:var(--tdark);margin-bottom:10px">확정기간 (예: 10~30년)</div><div class="klabel">주의할 점</div><div style="font-size:12px;color:var(--red);line-height:1.5">일시금으로 받아 쓰면 노후 재원이 사라짐</div></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:#8a7d6b;color:#fff;text-align:center;padding:12px;font-weight:800;font-size:14px">1층 국민연금</div><div style="padding:14px 16px"><div class="klabel">역할</div><div style="font-size:13.5px;font-weight:800;color:var(--tdark);margin-bottom:10px">생존선 (바닥 소득)</div><div class="klabel">성격</div><div style="font-size:13px;font-weight:700;color:var(--tdark);margin-bottom:10px">종신 · 물가연동</div><div class="klabel">주의할 점</div><div style="font-size:12px;color:var(--red);line-height:1.5">가입기간이 짧으면 바닥 자체가 낮아짐</div></div></div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:12px">제도 도입 시점 &mdash; 국민연금 1988년 · 퇴직연금 2005년(「근로자퇴직급여 보장법」 시행) · 주택연금 2007년. 세대에 따라 각 층에 쌓인 기간이 다릅니다.</div>
+  </div>
+  <div class="takeaway">1층과 4층은 평생, 2층과 3층은 기간 한정. <b>이 차이가 설계의 핵심입니다.</b></div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 03 · 장수 리스크</div><div class="pageno">22</div></div>
+  <h2 class="title sm">95세까지 산다면, <span class="orange-t">이 표는 다시 계산해야 합니다</span></h2>
+  <div class="content" style="margin-top:6px">
+    <div style="position:relative;height:16px;margin-bottom:6px"><span style="position:absolute;left:0;font-size:11.5px;color:var(--muted)">65세</span><span style="position:absolute;left:65%;transform:translateX(-50%);font-size:11.5px;color:var(--orange);font-weight:700">95세</span><span style="position:absolute;right:0;font-size:11.5px;color:var(--muted)">100세+</span></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:65%;background:var(--green);border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">개인연금 250만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--orange)">30년 후 종료</div></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:65%;background:var(--green-l);border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">퇴직연금 80만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--orange)">30년 후 종료</div></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--ink);border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">국민연금 100만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:#cfe6d9">종신 · 물가연동</div></div>
+    <div style="position:relative;height:36px;background:#e6e3db;border-radius:8px;margin-bottom:7px;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:100%;background:#2f5f45;border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:#fff">주택연금 120만원</div><div style="position:absolute;right:14px;top:0;bottom:0;display:flex;align-items:center;font-size:12px;font-weight:700;color:#cfe6d9">종신 · 정액</div></div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card"><div style="font-size:26px;font-weight:800;color:var(--green)">550만원 <span style="font-size:12px;color:var(--muted);font-weight:600">65~95세</span></div><p style="margin-top:4px">4층이 모두 작동하는 30년입니다.</p></div>
+      <div class="card"><div style="font-size:26px;font-weight:800;color:var(--orange)">220만원 <span style="font-size:12px;color:var(--muted);font-weight:600">95세 이후</span></div><p style="margin-top:4px">종신형인 국민연금과 주택연금만 남습니다.</p></div>
+      <div class="card"><div style="font-size:26px;font-weight:800;color:var(--red)">-60% <span style="font-size:12px;color:var(--muted);font-weight:600">감소폭</span></div><p style="margin-top:4px">확정기간형 두 층이 끝나는 순간의 낙차입니다.</p></div>
+    </div>
+  </div>
+  <div class="takeaway green">종신형과 확정기간형의 비율이 곧 <b>장수 리스크에 대한 대비 수준</b>입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="glow"></div><div class="pad">
+      <div class="top"><div class="eyebrow">Chapter 04 · 「2막1장」 생애설계</div><div class="pageno">23</div></div>
+      <div class="content" style="justify-content:center">
+        <div class="pill g" style="margin-bottom:16px">CHAPTER 04</div>
+        <div class="hero" style="font-size:52px">Action<br>Plan</div>
+        <div style="font-size:19px;color:#bcccc2;margin-top:14px;font-weight:600">지금 무엇부터 할 것인가</div>
+      </div>
+      <div style="position:absolute;right:56px;bottom:40px;font-size:150px;font-weight:800;color:rgba(255,255,255,.05);line-height:1">04</div>
+    </div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 04 · STEP 1</div><div class="pageno">24</div></div>
+  <h2 class="title sm">흩어진 내 연금을 <span class="green-t">한 화면에 모으십시오</span></h2>
+  <div class="content" style="margin-top:10px">
+    <div class="grid" style="grid-template-columns:1fr 1.1fr;gap:18px;align-items:start">
+      <div class="card dark"><div class="pill g" style="align-self:flex-start;margin-bottom:10px">금융감독원</div>
+        <div style="font-size:24px;font-weight:800;color:#fff">통합연금포털</div>
+        <div style="font-size:12px;color:#8fa89c;margin:4px 0 12px">금융감독원 홈페이지 → 금융소비자보호 → 통합연금포털</div>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px;color:#cfe6d9">
+          <div>· 내 연금조회 · 재무설계</div>
+          <div style="color:var(--green-l);font-weight:700">· 미청구 퇴직연금 조회</div>
+          <div>· 연금상품 비교공시 · 퇴직연금 비교공시</div>
+          <div>· 개인형 IRP 계좌 안내 · 전문가 상담</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="card" style="padding:14px 16px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:14.5px;font-weight:800;color:var(--tdark)">국민연금공단</div><div style="font-size:11.5px;font-weight:700;color:var(--green)">&lsquo;내 곁에 국민연금&rsquo; 앱 / 1355</div></div><p style="margin-top:5px">예상 연금액, 가입기간, 추납·임의계속 가능 여부</p></div>
+        <div class="card" style="padding:14px 16px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:14.5px;font-weight:800;color:var(--tdark)">퇴직연금사업자 · 인사부서</div><div style="font-size:11.5px;font-weight:700;color:var(--green)">가입 금융기관 조회</div></div><p style="margin-top:5px">DB형/DC형 여부, 현재 적립금, 수령 방식 선택지</p></div>
+        <div class="card" style="padding:14px 16px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:14.5px;font-weight:800;color:var(--tdark)">한국주택금융공사</div><div style="font-size:11.5px;font-weight:700;color:var(--green)">주택연금 예상연금 조회</div></div><p style="margin-top:5px">본인 연령·주택가격 기준 월 예상 수령액</p></div>
+        <div class="card soft" style="padding:11px 16px"><p style="color:var(--tdark);font-size:11.5px;line-height:1.55"><b style="color:var(--orange)">특히 &lsquo;미청구 퇴직연금&rsquo;</b> &mdash; 과거 이직 시 정산하지 않고 남겨둔 계좌가 있는지 반드시 확인하십시오.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 04 · STEP 2</div><div class="pageno">25</div></div>
+  <h2 class="title sm">나의 <span class="green-t">4층 연금 진단표</span></h2>
+  <div class="lead">STEP 1에서 조회한 숫자를 아래 표에 그대로 옮겨 적으십시오.</div>
+  <div class="content" style="margin-top:12px">
+    <table class="t" style="font-size:12.5px">
+      <tr><th>층</th><th>항목</th><th>내 예상 월 수령액</th><th>수령 개시</th><th>수령 기간</th><th>확인처</th></tr>
+      <tr><td class="lbl">1층</td><td>국민연금</td><td style="color:#bbb">__________</td><td style="color:#bbb">____세</td><td>종신</td><td style="text-align:left">1355 / 내 곁에 국민연금</td></tr>
+      <tr><td class="lbl">2층</td><td>퇴직연금</td><td style="color:#bbb">__________</td><td style="color:#bbb">____세</td><td style="color:#bbb">____년</td><td style="text-align:left">통합연금포털 / 인사부서</td></tr>
+      <tr><td class="lbl">3층</td><td>개인연금</td><td style="color:#bbb">__________</td><td style="color:#bbb">____세</td><td style="color:#bbb">____년</td><td style="text-align:left">통합연금포털</td></tr>
+      <tr><td class="lbl">4층</td><td>주택연금</td><td style="color:#bbb">__________</td><td style="color:#bbb">____세</td><td>종신</td><td style="text-align:left">한국주택금융공사</td></tr>
+      <tr class="sum"><td>합계</td><td></td><td>__________</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="card soft" style="margin-top:14px;text-align:center"><div style="font-size:15px;font-weight:800;color:var(--tdark)">목표 월 생활비 __________ &minus; 4층 합계 __________ = <span class="orange-t">부족액 __________</span></div></div>
+  </div>
+  <div class="takeaway">이 부족액이 앞으로의 저축·운용 목표이고, <b>3층 개인연금이 그것을 메우는 자리</b>입니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad nb">
+  <div class="top"><div class="eyebrow">Chapter 04 · STEP 3</div><div class="pageno">26</div></div>
+  <h2 class="title sm">퇴직 5년 전부터의 <span class="green-t">실행 순서</span></h2>
+  <div class="content" style="margin-top:12px">
+    <div class="grid g4" style="grid-template-columns:repeat(5,1fr);gap:12px">
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--ink);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">D-5년</div><div style="padding:14px 14px"><div style="font-size:17px;font-weight:800;color:var(--tdark);text-align:center;margin-bottom:10px">진단</div><p style="line-height:1.55">통합연금포털·1355로 4층 전부 조회. 부족액 확정.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">D-3년</div><div style="padding:14px 14px"><div style="font-size:17px;font-weight:800;color:var(--tdark);text-align:center;margin-bottom:10px">보강</div><p style="line-height:1.55">개인연금·IRP 납입 확대(세액공제 한도 활용). 추납·크레딧 검토.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--green-l);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">D-1년</div><div style="padding:14px 14px"><div style="font-size:17px;font-weight:800;color:var(--tdark);text-align:center;margin-bottom:10px">결정</div><p style="line-height:1.55">퇴직연금 수령방식(연금 vs 일시금) 결정. 임금피크제 영향 확인.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:#e0a24e;color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">퇴직 시점</div><div style="padding:14px 14px"><div style="font-size:17px;font-weight:800;color:var(--tdark);text-align:center;margin-bottom:10px">공백 설계</div><p style="line-height:1.55">크레바스 기간 생활비 재원 확정. 퇴직급여 IRP 이전.</p></div></div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="background:var(--orange);color:#fff;text-align:center;padding:11px;font-weight:800;font-size:14px">D+1년</div><div style="padding:14px 14px"><div style="font-size:17px;font-weight:800;color:var(--tdark);text-align:center;margin-bottom:10px">개시 조정</div><p style="line-height:1.55">연기연금 여부 결정. 주택연금 가입 시점 검토.</p></div></div>
+    </div>
+    <div class="card soft" style="margin-top:14px;padding:12px 18px"><p style="color:var(--tdark);font-size:12px;line-height:1.55"><b style="color:var(--orange)">되돌릴 수 없는 결정이 둘 있습니다</b> &mdash; 퇴직연금 일시금 수령, 그리고 조기노령연금 신청. 이 두 가지는 순서를 지켜 마지막에 판단하십시오.</p></div>
+  </div>
+  <div class="takeaway">지금 퇴직이 임박한 분은 <b>D-1년 칸</b>부터, 시간이 남은 분은 <b>D-3년 칸</b>부터 시작하시면 됩니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide light"><div class="pad">
+  <div class="top"><div class="eyebrow">Chapter 04 · 리스크 점검</div><div class="pageno">27</div></div>
+  <h2 class="title">가장 자주 반복되는 <span class="orange-t">다섯 가지 실수</span></h2>
+  <div class="content"><div style="display:flex;flex-direction:column;gap:9px">
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 18px"><div style="width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">&times;</div><div style="width:290px;font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0">퇴직급여를 일시금으로 받아 소비한다</div><div style="flex:1;font-size:12px;color:var(--muted);line-height:1.45">2층이 사라집니다. 연금으로 수령하면 퇴직소득세가 30~40% 감면되지만, 일시금은 전액 과세됩니다.</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 18px"><div style="width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">&times;</div><div style="width:290px;font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0">개인연금을 중도 해지한다</div><div style="flex:1;font-size:12px;color:var(--muted);line-height:1.45">그동안 받은 세액공제액이 기타소득세(16.5%)로 추징됩니다. 3층이 가장 큰 변수인데 가장 먼저 깨집니다.</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 18px"><div style="width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">&times;</div><div style="width:290px;font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0">급해서 조기노령연금을 신청한다</div><div style="flex:1;font-size:12px;color:var(--muted);line-height:1.45">최대 30%가 평생 감액됩니다. 공백 5년을 위해 남은 30년을 깎는 결정입니다.</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 18px"><div style="width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">&times;</div><div style="width:290px;font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0">집은 자녀 몫으로 남기고 생활비가 없다</div><div style="flex:1;font-size:12px;color:var(--muted);line-height:1.45">4층을 봉인한 상태입니다. 자산의 82%를 쓰지 못하면 나머지 18%로만 살아야 합니다.</div></div>
+    <div style="display:flex;align-items:center;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 18px"><div style="width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">&times;</div><div style="width:290px;font-size:14px;font-weight:800;color:var(--tdark);flex-shrink:0">배우자 연금을 계산에 넣지 않는다</div><div style="flex:1;font-size:12px;color:var(--muted);line-height:1.45">노후는 가구 단위입니다. 부부 합산으로 계산해야 부족액이 정확해집니다.</div></div>
+  </div></div>
+  <div class="takeaway green">다섯 가지 모두 <b>&lsquo;퇴직 직전 몇 달&rsquo;</b>에 결정됩니다. 그래서 지금 미리 정해 두어야 합니다.</div>
+</div></section></div>
+<div class="wrap"><section class="slide dark"><div class="pad">
+  <div class="top"><div class="eyebrow">Closing</div><div class="pageno">28</div></div>
+  <div class="content" style="justify-content:center">
+    <div class="hero" style="font-size:44px">질문을 바꾸면, <span class="g">답이 보입니다</span></div>
+    <div style="font-size:22px;font-weight:800;color:#fff;margin:16px 0 26px">&ldquo;얼마를 모을까&rdquo; &nbsp;&rarr;&nbsp; &ldquo;매달 얼마가 들어오게 할까&rdquo;</div>
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green-l);margin-top:7px;flex-shrink:0"></div><div style="width:130px;font-size:14px;font-weight:800;color:var(--green-l);flex-shrink:0">오늘 확인한 것</div><div style="flex:1;font-size:13.5px;color:#d5e2db;line-height:1.55">60대 평균 총자산 6.0억 중 금융자산은 1.1억. 국민연금 평균은 68만원이지만 20년 이상 가입자는 112만원.</div></div>
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green-l);margin-top:7px;flex-shrink:0"></div><div style="width:130px;font-size:14px;font-weight:800;color:var(--green-l);flex-shrink:0">바꿔야 할 관점</div><div style="flex:1;font-size:13.5px;color:#d5e2db;line-height:1.55">10억이라는 잔고 목표에서, 매달 550만원이 들어오는 4층 구조로.</div></div>
+    <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green-l);margin-top:7px;flex-shrink:0"></div><div style="width:130px;font-size:14px;font-weight:800;color:var(--green-l);flex-shrink:0">돌아가서 할 일</div><div style="flex:1;font-size:13.5px;color:#d5e2db;line-height:1.55">통합연금포털과 1355로 내 4층 숫자를 조회하고, 진단표의 부족액 한 칸을 채운다.</div></div>
+  </div>
+  <div style="position:absolute;left:56px;bottom:26px;font-size:11.5px;color:#6f8a7c;line-height:1.7">주식회사 라이프 2.0 · 생애설계 교육센터<br>「2막1장」 은퇴준비지수 진단 · 생애설계 전문가 과정 · 퇴직 전 교육 프로그램</div>
+</div></section></div>
+</div>
+<div class="counter" id="counter">01 / 28</div>
+<script>
+(function(){
+function fit(){var s=Math.min((window.innerWidth-20)/1000,(window.innerHeight-40)/562.5);s=Math.min(s,1.35);document.documentElement.style.setProperty("--scale",s);}
+window.addEventListener("resize",fit);fit();
+var slides=[].slice.call(document.querySelectorAll(".wrap"));var counter=document.getElementById("counter");var total=slides.length;
+function cur(){var mid=window.innerHeight/2,idx=0,best=1e9;slides.forEach(function(w,i){var r=w.getBoundingClientRect();var c=r.top+r.height/2;var d=Math.abs(c-mid);if(d<best){best=d;idx=i;}});return idx;}
+function update(){counter.textContent=String(cur()+1).padStart(2,"0")+" / "+String(total).padStart(2,"0");}
+window.addEventListener("scroll",update);update();
+document.addEventListener("keydown",function(e){var i=cur();if(e.key==="ArrowRight"||e.key==="ArrowDown"||e.key===" "){e.preventDefault();if(slides[i+1])slides[i+1].scrollIntoView({behavior:"smooth",block:"center"});}if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();if(slides[i-1])slides[i-1].scrollIntoView({behavior:"smooth",block:"center"});}});
+})();
+</script>
+</body></html>
